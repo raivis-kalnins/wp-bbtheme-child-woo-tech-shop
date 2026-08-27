@@ -2,8 +2,9 @@
 Theme Name: WP BBTheme Tech Store
 Description: Technology ecommerce sector child for WP BBTheme.
 Template: wp-bbtheme
-Version: 1.0.0
+Version: 2.0.0
 Requires at least: 6.6
+Tested up to: 7.1
 Requires PHP: 8.0
 Text Domain: wp-bbtheme-child-woo-tech
 */
@@ -17,3 +18,7 @@ Text Domain: wp-bbtheme-child-woo-tech
 .wp-theme-site-footer{margin:0;background:#0f172a;color:#94a3b8}.wp-theme-site-footer h5{margin:0 0 16px;color:#fff;font-size:13px;letter-spacing:.08em;text-transform:uppercase}.wp-theme-site-footer p,.wp-theme-site-footer li{color:#94a3b8}.wp-theme-site-footer a{color:#e2e8f0;text-decoration:none}.wp-theme-site-footer .wp-theme-demo-footer-logo{margin-bottom:18px;color:#fff}.wp-theme-site-footer .wp-theme-demo-footer-menu li{margin-bottom:8px}.wp-theme-site-footer .wp-theme-demo-footer-bottom{border-color:#334155!important}
 @media(max-width:991px){.admin-bar .wp-theme-site-header{top:46px}.wp-theme-header-shell,.wp-theme-header-shell:not(.wp-theme-header-shell--commerce){grid-template-columns:1fr auto;gap:12px}.wp-theme-header-search{grid-column:1/-1;grid-row:2;max-width:none}.wp-theme-demo-hamburger{display:block}.wp-theme-primary-navigation{position:fixed;top:78px;right:0;bottom:0;left:0;display:none;overflow:auto;padding:16px 0 40px;background:#fff}.admin-bar .wp-theme-primary-navigation{top:124px}.wp-theme-site-header.is-menu-open .wp-theme-primary-navigation{display:block}.wp-theme-site-header.is-menu-open .wp-theme-demo-hamburger span:nth-child(1){transform:translateY(6px) rotate(45deg)}.wp-theme-site-header.is-menu-open .wp-theme-demo-hamburger span:nth-child(2){opacity:0}.wp-theme-site-header.is-menu-open .wp-theme-demo-hamburger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}.wp-theme-primary-menu{display:block;min-height:0}.wp-theme-primary-menu a{min-height:52px;border-bottom:1px solid var(--sector-line);font-size:17px}.wp-theme-primary-menu .sub-menu{position:static;display:none;padding:0 0 0 18px;border:0;box-shadow:none}.wp-theme-primary-menu .is-open>.sub-menu{display:block}.wp-theme-sector-industries,.wp-theme-sector-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.container{width:min(100% - 28px,1240px)}.wp-theme-demo-action:not(.wp-theme-demo-cart){display:none}.wp-theme-sector-hero{min-height:0;padding-top:44px}.wp-theme-sector-industries,.wp-theme-sector-card-grid{grid-template-columns:1fr}.wp-theme-sector-section-heading{align-items:flex-start;flex-direction:column}}
+
+
+/* Commercial storefront additions */
+.wpbb-tech-category-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:30px auto 10px}.wpbb-tech-category-strip a{display:flex;min-height:118px;align-items:flex-end;padding:20px;border:1px solid var(--sector-line);border-radius:16px;background:linear-gradient(145deg,#fff,#eff6ff);color:var(--sector-text);font-size:18px;font-weight:800;text-decoration:none}.wpbb-tech-category-strip a:hover{border-color:var(--sector-primary);transform:translateY(-2px)}.wpbb-tech-trust{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;overflow:hidden;border:1px solid var(--sector-line);border-radius:16px;background:var(--sector-line)}.wpbb-tech-trust>div{padding:22px;background:#fff}.wpbb-tech-trust strong{display:block;margin-bottom:5px}.wpbb-tech-promo{padding:clamp(30px,5vw,64px);border-radius:24px;background:#0f172a;color:#fff}.wpbb-tech-promo p{color:#cbd5e1}.wpbb-tech-promo .wp-block-button__link{background:#fff!important;color:#0f172a!important}@media(max-width:800px){.wpbb-tech-category-strip,.wpbb-tech-trust{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.wpbb-tech-category-strip,.wpbb-tech-trust{grid-template-columns:1fr}}

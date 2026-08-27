@@ -1,6 +1,12 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+
+function wpbb_tech_project_mode( $mode ) { return 'woocommerce'; }
+add_filter( 'wp_theme_project_mode', 'wpbb_tech_project_mode' );
+function wpbb_tech_woo_profile( $profile ) { return 'store'; }
+add_filter( 'wp_theme_woo_support_default_profile', 'wpbb_tech_woo_profile' );
+
 function wpbb_tech_assets() {
 	$theme = wp_get_theme();
 	wp_enqueue_style( 'wpbb-tech', get_stylesheet_uri(), array( 'wp-theme-style' ), $theme->get( 'Version' ) );
@@ -17,7 +23,8 @@ function wpbb_tech_demo_profile( $profile ) {
 		'eyebrow' => __( 'Technology made useful', 'wp-bbtheme-child-woo-tech' ),
 		'hero_title' => __( 'Better technology for work, home and everywhere between.', 'wp-bbtheme-child-woo-tech' ),
 		'hero_text' => __( 'Discover considered devices, accessories and smart essentials with clear product information and fast filtering.', 'wp-bbtheme-child-woo-tech' ),
-		'hero_image' => 'https://placehold.co/1200x900/dbeafe/172554?text=Technology+Store',
+		'hero_image' => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/store/tech-hero.jpg',
+		'about_image' => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/store/studio-monitor.jpg',
 		'primary_label' => __( 'Shop technology', 'wp-bbtheme-child-woo-tech' ), 'primary_url' => '#shop',
 		'secondary_label' => __( 'Buying advice', 'wp-bbtheme-child-woo-tech' ), 'secondary_url' => '#services',
 		'industries' => array( __( 'Home office', 'wp-bbtheme-child-woo-tech' ), __( 'Mobile life', 'wp-bbtheme-child-woo-tech' ), __( 'Gaming', 'wp-bbtheme-child-woo-tech' ), __( 'Smart home', 'wp-bbtheme-child-woo-tech' ) ),
@@ -47,3 +54,26 @@ function wpbb_tech_demo_products( $products ) {
 	);
 }
 add_filter( 'wp_theme_woo_demo_product_data', 'wpbb_tech_demo_products' );
+
+function wpbb_tech_demo_product_image( $path, $product, $index ) {
+	$images = array(
+		'ultralight-laptop.jpg', 'studio-monitor.jpg', 'mechanical-keyboard.jpg', 'precision-mouse.jpg',
+		'noise-cancelling-headphones.jpg', 'portable-speaker.jpg', 'smart-home-hub.jpg', 'security-camera.jpg',
+		'usb-c-travel-dock.jpg', 'charging-station.jpg', 'smart-watch-strap.jpg', 'tech-organiser.jpg',
+	);
+	return isset( $images[ $index ] ) ? get_stylesheet_directory() . '/assets/img/store/' . $images[ $index ] : $path;
+}
+add_filter( 'wp_theme_woo_demo_product_image_path', 'wpbb_tech_demo_product_image', 10, 3 );
+
+function wpbb_tech_demo_variation_options( $options, $product ) {
+	$name = isset( $product[1] ) ? $product[1] : '';
+	if ( 'Smart Watch Strap' === $name ) {
+		return array( 'colors' => array( 'Midnight', 'Ocean', 'Stone' ), 'sizes' => array( 'Small', 'Medium', 'Large' ) );
+	}
+	if ( 'Tech Organiser' === $name ) {
+		return array( 'colors' => array( 'Graphite', 'Navy', 'Sand' ), 'sizes' => array( 'Compact', 'Standard', 'Large' ) );
+	}
+	return $options;
+}
+add_filter( 'wp_theme_woo_demo_variation_options', 'wpbb_tech_demo_variation_options', 10, 2 );
+

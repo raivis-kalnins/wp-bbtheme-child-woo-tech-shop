@@ -1,17 +1,18 @@
-# WP BBTheme Child — Woo Tech Shop
+# Technology Store v3.3
 
-Commercial-style WooCommerce child theme for electronics, accessories and smart-home stores. It uses WP BBTheme Core for shared functionality and WP Theme Woo Support for the reusable ecommerce layer.
+v3.3 adds the complete demo-page layer: richer About history, Contact form/map/details, five sector demo articles with local media, homepage case studies and Swiper gallery, exclusive FAQ behavior, scroll-to-top, icon-only header search, refreshed Appearance screenshot and additional archive/account polish where relevant. Run **Appearance → Starter Setup → Import / Refresh Starter Website** after upgrading so the stored demo content is rebuilt.
 
-## Automatic store mode
+## 3.3.0
+- Added complete Contact/About/Blog demos, case studies, gallery Swiper, exclusive FAQ accordion, scroll-to-top, icon-only header search, stronger Woo/account/archive styling and refreshed theme previews.
 
-Activating this theme selects WooCommerce project mode. The parent attempts to activate installed **WP BBuilder**, **WooCommerce** and **WP Theme Woo Support**. If a dependency is missing, **Appearance → Starter Setup** shows an install/upload action instead of failing silently.
+# v3.2 update note
 
-## Demo
+See the suite README for the v3.2 navigation, demo-switching and visual-system changes.
 
-The starter import creates/refreshes store pages, modern Woo Cart/Checkout blocks, filters, product attributes and 12 demo products with local product artwork. Gutenberg patterns include the tech hero, category strip, trust strip, feature and promotion sections.
+# WP BBTheme Child — Woo Tech Shop 3.0.0
 
-## Performance
+Specialist technology WooCommerce child theme. All reusable store functionality is owned by **WP Theme Woo Support**; this child owns only sector design, demo data/patterns and presentation.
 
-The theme selects the Woo Support **Store** profile. Product-filter/Select2 assets load only on relevant shop/filter views; the parent remains presentation-neutral.
+Starter Setup activates installed WP BBuilder, WooCommerce and Woo Support dependencies, selects the Store profile, seeds store pages/products and builds an editable Shop → product-category menu hierarchy. The home demo includes BBuilder/Bootstrap sections, a Swiper hero, trust/category/buying-guide content and the shared AJAX product filter/results layer.
 
-Version 2.0.0; tested up to WordPress 7.1.
+Source is in `src/scss` and `src/js`; run `yarn prod`. No child-theme `clamp()` sizing is used.

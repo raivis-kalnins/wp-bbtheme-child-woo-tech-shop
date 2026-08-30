@@ -1,18 +1,19 @@
-# Technology Store v3.3
+# WP BBTheme Child Woo Tech Shop 3.7.0
 
-v3.3 adds the complete demo-page layer: richer About history, Contact form/map/details, five sector demo articles with local media, homepage case studies and Swiper gallery, exclusive FAQ behavior, scroll-to-top, icon-only header search, refreshed Appearance screenshot and additional archive/account polish where relevant. Run **Appearance → Starter Setup → Import / Refresh Starter Website** after upgrading so the stored demo content is rebuilt.
+Technology WooCommerce child theme. Reusable ecommerce filtering/minicart functionality remains in **WP Theme Woo Support**; this theme owns presentation and Woo page shells.
 
-## 3.3.0
-- Added complete Contact/About/Blog demos, case studies, gallery Swiper, exclusive FAQ accordion, scroll-to-top, icon-only header search, stronger Woo/account/archive styling and refreshed theme previews.
+## v3.7 classic Woo customer journey
 
-# v3.2 update note
+The child now routes the front end through version-safe PHP shells for:
 
-See the suite README for the v3.2 navigation, demo-switching and visual-system changes.
+- Shop and product taxonomy catalogue (retaining the shared AJAX filter/results layer).
+- Single product through the installed WooCommerce legacy product engine.
+- Basket/Cart through `WC_Shortcode_Cart`.
+- Checkout and order-received through `WC_Shortcode_Checkout`.
+- My Account and endpoints through `WC_Shortcode_My_Account`.
 
-# WP BBTheme Child — Woo Tech Shop 3.0.0
+This deliberately uses the legacy templates shipped by the **installed WooCommerce version** instead of bundling stale copies. The child adds the polished tables, forms, checkout/order, account navigation, responsive behaviour and product-gallery theme support.
 
-Specialist technology WooCommerce child theme. All reusable store functionality is owned by **WP Theme Woo Support**; this child owns only sector design, demo data/patterns and presentation.
+The latest supplied localhost DB reports WooCommerce 11.0.1 with HPOS enabled.
 
-Starter Setup activates installed WP BBuilder, WooCommerce and Woo Support dependencies, selects the Store profile, seeds store pages/products and builds an editable Shop → product-category menu hierarchy. The home demo includes BBuilder/Bootstrap sections, a Swiper hero, trust/category/buying-guide content and the shared AJAX product filter/results layer.
-
-Source is in `src/scss` and `src/js`; run `yarn prod`. No child-theme `clamp()` sizing is used.
+Run `yarn prod`. After upgrading, run **Appearance → Starter Setup → Import / Refresh Starter Website**.

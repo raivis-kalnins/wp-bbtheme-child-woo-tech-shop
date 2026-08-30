@@ -188,3 +188,42 @@ function wpbb_tech_mega_menu_definitions( $definitions, $profile ) {
 	return $definitions;
 }
 add_filter( 'wp_theme_demo_mega_menu_definitions', 'wpbb_tech_mega_menu_definitions', 20, 2 );
+
+/** v3.5 sector editorial labels. */
+function wpbb_tech_blog_profile_v35( $profile ) {
+    if ( ( $profile['id'] ?? '' ) !== 'tech' ) return $profile;
+    $profile['blog_eyebrow'] = __( 'Guides & advice', 'wp-bbtheme-child-woo-tech' );
+    $profile['blog_archive_title'] = __( 'Technology guides that help you choose with confidence.', 'wp-bbtheme-child-woo-tech' );
+    $profile['blog_archive_intro'] = __( 'Straightforward comparisons, setup advice and buying guides without the usual specification overload.', 'wp-bbtheme-child-woo-tech' );
+    return $profile;
+}
+add_filter( 'wp_theme_demo_profile', 'wpbb_tech_blog_profile_v35', 90 );
+
+/** v3.6: classic WooCommerce PHP shells for the full customer journey. */
+function wpbb_tech_woocommerce_support_v36() {
+    add_theme_support( 'woocommerce' );
+    add_theme_support( 'wc-product-gallery-zoom' );
+    add_theme_support( 'wc-product-gallery-lightbox' );
+    add_theme_support( 'wc-product-gallery-slider' );
+}
+add_action( 'after_setup_theme', 'wpbb_tech_woocommerce_support_v36', 30 );
+
+function wpbb_tech_woocommerce_legacy_template_v36( $template ) {
+    if ( is_admin() || ! function_exists( 'WC' ) || wp_doing_ajax() || is_feed() ) return $template;
+    $base = trailingslashit( get_stylesheet_directory() ) . 'woocommerce-legacy/';
+    $candidate = '';
+    if ( function_exists( 'is_cart' ) && is_cart() ) $candidate = 'cart.php';
+    elseif ( function_exists( 'is_checkout' ) && is_checkout() ) $candidate = 'checkout.php';
+    elseif ( function_exists( 'is_account_page' ) && is_account_page() ) $candidate = 'account.php';
+    elseif ( function_exists( 'is_product' ) && is_product() ) $candidate = 'product.php';
+    elseif ( ( function_exists( 'is_shop' ) && is_shop() ) || ( function_exists( 'is_product_taxonomy' ) && is_product_taxonomy() ) ) $candidate = 'catalog.php';
+    if ( $candidate && is_readable( $base . $candidate ) ) return $base . $candidate;
+    return $template;
+}
+add_filter( 'template_include', 'wpbb_tech_woocommerce_legacy_template_v36', 99 );
+
+function wpbb_tech_woocommerce_legacy_body_class_v36( $classes ) {
+    if ( function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) ) $classes[] = 'wp-theme-uses-woo-legacy-shell';
+    return $classes;
+}
+add_filter( 'body_class', 'wpbb_tech_woocommerce_legacy_body_class_v36' );

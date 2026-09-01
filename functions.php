@@ -28,7 +28,7 @@ function wpbb_tech_demo_profile( $profile ) {
 		'eyebrow' => __( 'Technology made useful', 'wp-bbtheme-child-woo-tech' ),
 		'hero_title' => __( 'Better technology for work, home and everywhere between.', 'wp-bbtheme-child-woo-tech' ),
 		'hero_text' => __( 'Discover considered devices, accessories and smart essentials with clear product information and fast filtering.', 'wp-bbtheme-child-woo-tech' ),
-		'hero_image' => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/store/tech-hero.jpg',
+		'hero_image' => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/store/tech-workspace.jpg',
 		'about_image' => trailingslashit( get_stylesheet_directory_uri() ) . 'assets/img/store/studio-monitor.jpg',
 		'primary_label' => __( 'Shop technology', 'wp-bbtheme-child-woo-tech' ), 'primary_url' => '#shop',
 		'secondary_label' => __( 'Buying advice', 'wp-bbtheme-child-woo-tech' ), 'secondary_url' => '#services',
@@ -107,7 +107,7 @@ function wpbb_tech_demo_profile_premium( $profile ) {
 	$profile['stats'] = array(
 		array( '24h', __( 'Fast dispatch on stocked lines', 'wp-bbtheme-child-woo-tech' ) ),
 		array( '2yr', __( 'Support on core devices', 'wp-bbtheme-child-woo-tech' ) ),
-		array( '12', __( 'Curated demo products', 'wp-bbtheme-child-woo-tech' ) ),
+		array( '12', __( 'Curated products', 'wp-bbtheme-child-woo-tech' ) ),
 		array( '1', __( 'Clean WooCommerce system', 'wp-bbtheme-child-woo-tech' ) ),
 	);
 	$profile['process'] = array(
@@ -116,8 +116,8 @@ function wpbb_tech_demo_profile_premium( $profile ) {
 		array( '03', __( 'Get set up', 'wp-bbtheme-child-woo-tech' ), __( 'Keep delivery, account and support journeys close to the purchase.', 'wp-bbtheme-child-woo-tech' ) ),
 	);
 	$profile['cta_title'] = __( 'Build a better everyday setup.', 'wp-bbtheme-child-woo-tech' );
-	$profile['cta_text'] = __( 'Use the demo catalogue, filters and buying-guide sections as a complete starting point for a specialist technology retailer.', 'wp-bbtheme-child-woo-tech' );
-	$profile['footer_text'] = __( 'A specialist WooCommerce starter for useful technology, clear advice and fast product discovery.', 'wp-bbtheme-child-woo-tech' );
+	$profile['cta_text'] = __( 'Use the catalogue, filters and buying guides to compare useful technology with less noise.', 'wp-bbtheme-child-woo-tech' );
+	$profile['footer_text'] = __( 'A specialist technology store with clear advice and fast product discovery.', 'wp-bbtheme-child-woo-tech' );
 	$profile['page_labels'] = array( 'about' => __( 'About', 'wp-bbtheme-child-woo-tech' ), 'services' => __( 'Buying advice', 'wp-bbtheme-child-woo-tech' ), 'industries' => __( 'Use cases', 'wp-bbtheme-child-woo-tech' ), 'contact' => __( 'Support', 'wp-bbtheme-child-woo-tech' ), 'blog' => __( 'Guides', 'wp-bbtheme-child-woo-tech' ) );
 	return $profile;
 }

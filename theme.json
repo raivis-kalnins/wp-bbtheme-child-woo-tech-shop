@@ -1,1 +1,44 @@
-{"$schema":"https://schemas.wp.org/trunk/theme.json","version":3,"settings":{"appearanceTools":true,"layout":{"contentSize":"840px","wideSize":"1240px"},"color":{"palette":[{"slug":"tech-blue","name":"Tech Blue","color":"#2563eb"},{"slug":"navy","name":"Navy","color":"#0f172a"},{"slug":"ice","name":"Ice","color":"#f1f5f9"},{"slug":"white","name":"White","color":"#ffffff"}]},"typography":{"fluid":true}},"styles":{"typography":{"fontFamily":"Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif","lineHeight":"1.6"}}}
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "880px",
+      "wideSize": "1280px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "tech-blue",
+          "name": "Tech Blue",
+          "color": "#2563eb"
+        },
+        {
+          "slug": "navy",
+          "name": "Navy",
+          "color": "#0f172a"
+        },
+        {
+          "slug": "ice",
+          "name": "Ice",
+          "color": "#f1f5f9"
+        },
+        {
+          "slug": "white",
+          "name": "White",
+          "color": "#ffffff"
+        }
+      ]
+    },
+    "typography": {
+      "fluid": false
+    }
+  },
+  "styles": {
+    "typography": {
+      "fontFamily": "Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
+      "lineHeight": "1.6"
+    }
+  }
+}

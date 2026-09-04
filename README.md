@@ -1,12 +1,17 @@
-## 3.8.10.46
+## 3.8.10.48
 
-- Replaces dashboard-blocking sector-media migrations with a resumable small-batch worker.
-- Restores active-sector page, managed Blog, directory and gallery images after child-theme switching.
-- Keeps frontend password controls inside **Settings → Theme Settings → General**.
-- Places compact thumbnail navigation inside the bottom of the large gallery image and retains the full-screen modal.
-- Includes WordPress 6.7+ translation timing and ACF initialization compatibility fixes supplied by the parent theme and WP BBuilder update.
+- Fixes the Theme Settings frontend-protection panel so its CSS is loaded in the admin head instead of appearing as visible text.
+- Makes sector media repair load the WordPress image API safely before generating attachment metadata.
+- Refines shared card, directory, gallery and responsive alignment.
+- Adds block-theme Single Product, Cart and Checkout templates while preserving the existing classic-template fallback.
 
-# WP BBTheme Child Woo Tech Shop 3.8.10.46
+## 3.8.10.47
+
+- More compact and consistent section spacing, cards and responsive layouts.
+- Smaller in-frame gallery thumbnail pagination and improved light/dark contrast.
+- Reliable child-owned WooCommerce product shells where the theme includes commerce.
+
+# WP BBTheme Child Woo Tech Shop 3.8.10.48
 Technology WooCommerce child theme. Reusable ecommerce filtering/minicart functionality remains in **WP Theme Woo Support**; this theme owns presentation and Woo page shells.
 
 ## v3.7 classic Woo customer journey

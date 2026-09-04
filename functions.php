@@ -211,6 +211,7 @@ add_action( 'after_setup_theme', 'wpbb_tech_woocommerce_support_v36', 30 );
 
 function wpbb_tech_woocommerce_legacy_template_v36( $template ) {
     if ( is_admin() || ! function_exists( 'WC' ) || wp_doing_ajax() || is_feed() ) return $template;
+    if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) return $template;
     $base = trailingslashit( get_stylesheet_directory() ) . 'woocommerce-legacy/';
     $candidate = '';
     if ( function_exists( 'is_cart' ) && is_cart() ) $candidate = 'cart.php';
@@ -527,7 +528,7 @@ function wpbb_woo_tech_shop_demo_blog_photo_attachment( $filename, $title ) {
     ), $target );
     if ( $id && ! is_wp_error( $id ) ) {
         if ( ! function_exists( 'wp_generate_attachment_metadata' ) ) require_once ABSPATH . 'wp-admin/includes/image.php';
-        $meta = wp_generate_attachment_metadata( $id, $target );
+        $meta = wpbb_child_381048_generate_attachment_metadata( $id, $target );
         if ( $meta ) wp_update_attachment_metadata( $id, $meta );
         update_post_meta( $id, '_wp_attachment_image_alt', $title );
         return (int) $id;
@@ -619,7 +620,7 @@ function wpbb_woo_tech_shop_refresh_bundled_attachment_v381041( $attachment_id, 
         }
     }
 
-    $meta = wp_generate_attachment_metadata( $attachment_id, $target );
+    $meta = wpbb_child_381048_generate_attachment_metadata( $attachment_id, $target );
     if ( $meta ) wp_update_attachment_metadata( $attachment_id, $meta );
     clean_attachment_cache( $attachment_id );
     return true;
@@ -676,7 +677,7 @@ function wpbb_woo_tech_shop_realistic_media_upgrade_v381041() {
                 $target = get_attached_file( $attachment_id );
                 if ( $target ) {
                     if ( ! function_exists( 'wp_generate_attachment_metadata' ) ) require_once ABSPATH . 'wp-admin/includes/image.php';
-                    $meta = wp_generate_attachment_metadata( $attachment_id, $target );
+                    $meta = wpbb_child_381048_generate_attachment_metadata( $attachment_id, $target );
                     if ( $meta ) wp_update_attachment_metadata( $attachment_id, $meta );
                 }
                 set_post_thumbnail( $matches[0]->ID, $attachment_id );
@@ -865,3 +866,35 @@ add_action( 'admin_init', 'wpbb_child_381043_refresh_media_once', 130 );
  * v3.8.10.45: shared rhythm, contrast, sector-media and gallery repair.
  */
 require_once __DIR__ . '/inc/sector-consistency.php';
+
+/**
+ * v3.8.10.47: win the final template_include pass for WooCommerce screens.
+ * Some block-template resolvers run after the older priority-99 callback and
+ * can otherwise replace the complete child-owned product shell with a generic
+ * single-post template.
+ */
+if ( ! function_exists( 'wpbb_child_381047_force_woo_legacy_template' ) ) {
+    function wpbb_child_381047_force_woo_legacy_template( $template ) {
+        if ( is_admin() || wp_doing_ajax() || is_feed() || ! post_type_exists( 'product' ) ) {
+            return $template;
+        }
+        if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
+            return $template;
+        }
+        $base = trailingslashit( get_stylesheet_directory() ) . 'woocommerce-legacy/';
+        $candidate = '';
+        if ( ( function_exists( 'is_product' ) && is_product() ) || is_singular( 'product' ) ) {
+            $candidate = 'product.php';
+        } elseif ( function_exists( 'is_cart' ) && is_cart() ) {
+            $candidate = 'cart.php';
+        } elseif ( function_exists( 'is_checkout' ) && is_checkout() ) {
+            $candidate = 'checkout.php';
+        } elseif ( function_exists( 'is_account_page' ) && is_account_page() ) {
+            $candidate = 'account.php';
+        } elseif ( ( function_exists( 'is_shop' ) && is_shop() ) || ( function_exists( 'is_product_taxonomy' ) && is_product_taxonomy() ) ) {
+            $candidate = 'catalog.php';
+        }
+        return $candidate && is_readable( $base . $candidate ) ? $base . $candidate : $template;
+    }
+}
+add_filter( 'template_include', 'wpbb_child_381047_force_woo_legacy_template', PHP_INT_MAX );

@@ -1,4 +1,4 @@
-## 3.8.10.64
+## 3.8.10.65
 
 - Fixes the Theme Settings frontend-protection panel so its CSS is loaded in the admin head instead of appearing as visible text.
 - Makes sector media repair load the WordPress image API safely before generating attachment metadata.
@@ -11,7 +11,7 @@
 - Smaller in-frame gallery thumbnail pagination and improved light/dark contrast.
 - Reliable child-owned WooCommerce product shells where the theme includes commerce.
 
-# WP BBTheme Child Woo Tech Shop 3.8.10.64
+# WP BBTheme Child Woo Tech Shop 3.8.10.65
 Technology WooCommerce child theme. Reusable ecommerce filtering/minicart functionality remains in **WP Theme Woo Support**; this theme owns presentation and Woo page shells.
 
 ## v3.7 classic Woo customer journey
@@ -72,5 +72,5 @@ The command runs `node tools/build.mjs` and rebuilds the hashed CSS/JS manifest 
 - Current child-theme media is reapplied after child-theme switches, including optimised AVIF/WebP files.
 - Visible slider/grid images are loaded deterministically and duplicate single-item summary text is removed.
 
-## 3.8.10.64 BBuilder demo system
+## 3.8.10.65 BBuilder demo system
 This release expects WP BBuilder 5.6.4+ and standardises demo editing around BBuilder Row/Column, Div, Icon Card, Swiper and selected native WordPress content blocks. Legacy Group/Columns demo markup is migrated automatically.

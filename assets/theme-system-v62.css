@@ -231,7 +231,7 @@ form label,.woocommerce form .form-row label{display:block;margin-bottom:.35rem;
 }
 
 
-/* v3.8.10.64 demo content + Bootstrap grid polish */
+/* v3.8.10.65 demo content + Bootstrap grid polish */
 .wpbb-bootstrap-div.container{width:100%;max-width:var(--wpbb-content,1320px);margin-inline:auto;padding-inline:clamp(16px,2.4vw,32px)}
 .wpbb-v64-section,.wpbb-v64-page-hero{margin-block:clamp(28px,5vw,72px)}
 .wpbb-v64-page-hero{padding-block:clamp(24px,4vw,56px)}
@@ -249,3 +249,36 @@ form label,.woocommerce form .form-row label{display:block;margin-bottom:.35rem;
 .wpbb-swiper--hero .wpbb-swiper-slide,.wpbb-swiper-slide--hero{min-height:clamp(420px,58vw,690px)}
 .wpbb-swiper-slide__content{max-width:680px}
 @media (max-width:767.98px){.wpbb-bootstrap-div.container{padding-inline:16px}.wpbb-v64-section,.wpbb-v64-page-hero{margin-block:32px}}
+
+
+/* v3.8.10.65 layout compatibility: preserve neutral BBuilder wrappers and rich demo spacing. */
+.wpbb-bootstrap-div.wpbb-migrated-group{max-width:none;width:100%}
+.wp-theme-section-shell>.wpbb-row:first-child:last-child{margin-top:0;margin-bottom:0}
+.wp-theme-section-shell .wpbb-column{min-width:0}
+.wp-theme-section-shell .wpbb-icon-card{height:100%}
+.wp-theme-section-shell figure{margin-top:0}
+.wp-theme-sector-media-text__media{width:100%}
+.wp-theme-sector-media-text__media img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:991.98px){.wp-theme-sector-media-text .wpbb-column:last-child{padding-left:calc(var(--bs-gutter-x,1.5rem)*.5)}.wp-theme-sector-media-text__media img{min-height:320px}}
+@media (max-width:575.98px){.wp-theme-section-shell{padding-top:56px;padding-bottom:56px}.wp-theme-section-heading{margin-bottom:28px}.wp-theme-sector-card{padding:24px 22px}.wp-theme-sector-media-text__media img{min-height:260px}}
+
+/* Respect WooCommerce's requested catalogue column count while retaining responsive cards. */
+.woocommerce ul.products.columns-1,.woocommerce-page ul.products.columns-1{grid-template-columns:1fr}
+.woocommerce ul.products.columns-2,.woocommerce-page ul.products.columns-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.woocommerce ul.products.columns-3,.woocommerce-page ul.products.columns-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.woocommerce ul.products.columns-4,.woocommerce-page ul.products.columns-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.woocommerce ul.products.columns-5,.woocommerce-page ul.products.columns-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.woocommerce ul.products.columns-6,.woocommerce-page ul.products.columns-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.woocommerce ul.products li.product .star-rating{margin:.35rem 0 .65rem}
+.woocommerce ul.products li.product .price{display:block;line-height:1.35}
+.woocommerce ul.products li.product .button{align-self:stretch}
+.woocommerce div.product form.cart{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.woocommerce div.product form.cart .variations{width:100%;margin-bottom:8px}
+.woocommerce div.product .quantity .qty{min-height:44px}
+.woocommerce .woocommerce-message,.woocommerce .woocommerce-info,.woocommerce .woocommerce-error{box-sizing:border-box;border-radius:12px}
+@media (max-width:1199.98px){.woocommerce ul.products.columns-5,.woocommerce-page ul.products.columns-5,.woocommerce ul.products.columns-6,.woocommerce-page ul.products.columns-6{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:991.98px){.woocommerce ul.products.columns-3,.woocommerce-page ul.products.columns-3,.woocommerce ul.products.columns-4,.woocommerce-page ul.products.columns-4,.woocommerce ul.products.columns-5,.woocommerce-page ul.products.columns-5,.woocommerce ul.products.columns-6,.woocommerce-page ul.products.columns-6{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:575.98px){.woocommerce ul.products[class*="columns-"],.woocommerce-page ul.products[class*="columns-"]{grid-template-columns:1fr}.woocommerce div.product form.cart{align-items:stretch}.woocommerce div.product form.cart .quantity,.woocommerce div.product form.cart .single_add_to_cart_button{width:100%}.woocommerce div.product form.cart .quantity .qty{width:100%}}
+
+/* Tech catalogue: show the whole device cleanly inside the product card. */
+.woocommerce ul.products li.product a img,.wp-theme-store-grid ul.products li.product a img{aspect-ratio:4/3;object-fit:contain;background:#f7f8fb;padding:14px}

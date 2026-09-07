@@ -1,6 +1,6 @@
 <?php
 /**
- * Shared v3.8.10.64 BBuilder demo/admin consistency layer.
+ * Shared v3.8.10.65 BBuilder demo/admin consistency layer.
  *
  * Goals:
  * - BBuilder Row/Column are the only grid primitives.
@@ -195,7 +195,7 @@ if ( ! function_exists( 'wpbb_child_v62_cards_row' ) ) {
 
 
 /**
- * v3.8.10.64 demo media pool.
+ * v3.8.10.65 demo media pool.
  *
  * Prefer explicit profile media, then fill the slider/gallery from the active
  * child theme's own photo assets. This prevents BBuilder's generic fallback
@@ -527,33 +527,7 @@ if ( ! function_exists( 'wpbb_child_v62_repair_serialized_content' ) ) {
         }, $content );
         // Known legacy raw item that sat directly inside a BBuilder Column.
         $content = preg_replace( '~<p class="wp-theme-partners-heading">(.*?)</p>~s', '<!-- wp:paragraph {"className":"wp-theme-partners-heading"} --><p class="wp-theme-partners-heading">$1</p><!-- /wp:paragraph -->', $content );
-        if ( ! function_exists( 'parse_blocks' ) || ! function_exists( 'serialize_blocks' ) ) return $content;
-        $blocks = parse_blocks( $content );
-        $normalize = static function( $items ) use ( &$normalize ) {
-            $out = array();
-            foreach ( (array) $items as $block ) {
-                if ( ! is_array( $block ) ) { $out[] = $block; continue; }
-                if ( ! empty( $block['innerBlocks'] ) ) $block['innerBlocks'] = $normalize( $block['innerBlocks'] );
-                $name = (string) ( $block['blockName'] ?? '' );
-                if ( 'core/group' === $name ) {
-                    $attrs = is_array( $block['attrs'] ?? null ) ? $block['attrs'] : array();
-                    $block['blockName'] = 'wpbb/bootstrap-div';
-                    $block['attrs'] = array( 'utilityClasses' => trim( (string) ( $attrs['className'] ?? '' ) ), 'className' => 'wpbb-migrated-group' );
-                    $block['innerHTML'] = ''; $block['innerContent'] = array_fill( 0, count( (array) ( $block['innerBlocks'] ?? array() ) ), null );
-                } elseif ( 'core/columns' === $name ) {
-                    $count = max( 1, count( (array) ( $block['innerBlocks'] ?? array() ) ) );
-                    $equal = 0 === 12 % $count ? (int) ( 12 / $count ) : 0;
-                    foreach ( $block['innerBlocks'] as &$child ) if ( is_array( $child ) && 'wpbb/column' === ( $child['blockName'] ?? '' ) ) { $child['attrs']['xs'] = 12; if ( $equal ) $child['attrs']['md'] = $equal; }
-                    unset( $child );
-                    $block['blockName'] = 'wpbb/row'; $block['attrs'] = array( 'gutterX'=>'gx-4','gutterY'=>'gy-4' ); $block['innerHTML']=''; $block['innerContent']=array_fill(0,count((array)$block['innerBlocks']),null);
-                } elseif ( 'core/column' === $name ) {
-                    $block['blockName'] = 'wpbb/column'; $block['attrs'] = array( 'xs'=>12 ); $block['innerHTML']=''; $block['innerContent']=array_fill(0,count((array)$block['innerBlocks']),null);
-                }
-                $out[] = $block;
-            }
-            return $out;
-        };
-        return serialize_blocks( $normalize( $blocks ) );
+        return $content;
     }
 }
 
@@ -562,8 +536,7 @@ if ( ! function_exists( 'wpbb_child_v62_is_managed_demo_page' ) ) {
         if ( ! $page_id || 'page' !== get_post_type( $page_id ) ) return false;
         if ( '1' === (string) get_post_meta( $page_id, '_wp_theme_demo_managed', true ) ) return true;
         if ( get_post_meta( $page_id, '_wpbb_child_bbuilder_version', true ) ) return true;
-        $content = (string) get_post_field( 'post_content', $page_id, 'raw' );
-        return false !== strpos( $content, 'wp-theme-' ) || false !== strpos( $content, 'wpbb/' );
+        return false;
     }
 }
 
@@ -587,20 +560,20 @@ if ( ! function_exists( 'wpbb_child_v62_rebuild_demo_pages' ) ) {
     function wpbb_child_v62_rebuild_demo_pages( $force = false ) {
         if ( ! current_user_can( 'manage_options' ) ) return;
         $stylesheet = sanitize_key( get_stylesheet() );
-        $done_key = 'wpbb_child_v64_demo_system_' . $stylesheet;
+        $done_key = 'wpbb_child_v65_demo_system_' . $stylesheet;
         $front_probe = absint( get_option( 'page_on_front' ) );
         $front_probe_content = $front_probe ? (string) get_post_field( 'post_content', $front_probe, 'raw' ) : '';
         $needs_placeholder_repair = $front_probe && wpbb_child_v62_has_placeholder_dynamic_blocks( $front_probe_content );
-        if ( ! $force && ! $needs_placeholder_repair && '3.8.10.64' === (string) get_option( $done_key ) ) return;
+        if ( ! $force && ! $needs_placeholder_repair && '3.8.10.65' === (string) get_option( $done_key ) ) return;
         $profile = wpbb_child_v62_profile();
-        if ( empty( $profile['id'] ) ) { update_option( $done_key, '3.8.10.64', false ); return; }
+        if ( empty( $profile['id'] ) ) { update_option( $done_key, '3.8.10.65', false ); return; }
 
         $front = absint( get_option( 'page_on_front' ) );
         if ( $front && wpbb_child_v62_is_managed_demo_page( $front ) ) {
             $clean = wpbb_child_v62_front_content( $profile );
             if ( $clean ) {
                 wp_update_post( array( 'ID' => $front, 'post_content' => $clean ) );
-                update_post_meta( $front, '_wpbb_child_bbuilder_version', '3.8.10.64' );
+                update_post_meta( $front, '_wpbb_child_bbuilder_version', '3.8.10.65' );
                 update_post_meta( $front, '_wp_theme_demo_managed', '1' );
                 clean_post_cache( $front );
             }
@@ -615,7 +588,7 @@ if ( ! function_exists( 'wpbb_child_v62_rebuild_demo_pages' ) ) {
             $clean = wpbb_child_v62_simple_page_content( $profile, $key );
             if ( $clean ) {
                 wp_update_post( array( 'ID' => $page->ID, 'post_content' => $clean ) );
-                update_post_meta( $page->ID, '_wpbb_child_bbuilder_version', '3.8.10.64' );
+                update_post_meta( $page->ID, '_wpbb_child_bbuilder_version', '3.8.10.65' );
                 update_post_meta( $page->ID, '_wp_theme_demo_managed', '1' );
             }
         }
@@ -628,16 +601,15 @@ if ( ! function_exists( 'wpbb_child_v62_rebuild_demo_pages' ) ) {
             $content = (string) get_post_field( 'post_content', $page_id, 'raw' );
             $fixed = wpbb_child_v62_repair_serialized_content( $content );
             if ( $fixed !== $content ) wp_update_post( array( 'ID'=>$page_id, 'post_content'=>$fixed ) );
-            update_post_meta( $page_id, '_wpbb_child_bbuilder_version', '3.8.10.64' );
+            update_post_meta( $page_id, '_wpbb_child_bbuilder_version', '3.8.10.65' );
         }
-        update_option( $done_key, '3.8.10.64', false );
+        update_option( $done_key, '3.8.10.65', false );
     }
-    add_action( 'admin_init', 'wpbb_child_v62_rebuild_demo_pages', 80 );
 }
 
 if ( ! function_exists( 'wpbb_child_v62_after_demo_import' ) ) {
     function wpbb_child_v62_after_demo_import( $page_id = 0, $profile = array() ) {
-        delete_option( 'wpbb_child_v64_demo_system_' . sanitize_key( get_stylesheet() ) );
+        delete_option( 'wpbb_child_v65_demo_system_' . sanitize_key( get_stylesheet() ) );
         if ( is_admin() && current_user_can( 'manage_options' ) ) wpbb_child_v62_rebuild_demo_pages( true );
     }
     add_action( 'wp_theme_after_demo_import', 'wpbb_child_v62_after_demo_import', 999, 2 );
@@ -649,16 +621,57 @@ if ( ! function_exists( 'wpbb_child_v62_normalize_on_save' ) ) {
         $data['post_content'] = wpbb_child_v62_repair_serialized_content( $data['post_content'] );
         return $data;
     }
-    add_filter( 'wp_insert_post_data', 'wpbb_child_v62_normalize_on_save', 95, 2 );
 }
 
 if ( ! function_exists( 'wpbb_child_v62_enqueue_system_css' ) ) {
     function wpbb_child_v62_enqueue_system_css() {
         $path = get_stylesheet_directory() . '/assets/theme-system-v62.css';
         if ( is_readable( $path ) ) {
-            wp_enqueue_style( 'wpbb-child-system-v62', get_stylesheet_directory_uri() . '/assets/theme-system-v62.css', array(), '3.8.10.64' );
+            wp_enqueue_style( 'wpbb-child-system-v62', get_stylesheet_directory_uri() . '/assets/theme-system-v62.css', array(), '3.8.10.65' );
         }
     }
     add_action( 'wp_enqueue_scripts', 'wpbb_child_v62_enqueue_system_css', 140 );
     add_action( 'enqueue_block_editor_assets', 'wpbb_child_v62_enqueue_system_css', 140 );
+}
+
+
+/* v3.8.10.65: safe, explicit BBuilder demo maintenance UI. */
+if ( ! function_exists( 'wpbb_child_v65_demo_admin_menu' ) ) {
+    function wpbb_child_v65_demo_admin_menu() {
+        if ( ! current_user_can( 'manage_options' ) ) return;
+        add_theme_page(
+            __( 'BBuilder Demo', 'wp-bbuilder' ),
+            __( 'BBuilder Demo', 'wp-bbuilder' ),
+            'manage_options',
+            'wpbb-child-demo',
+            'wpbb_child_v65_demo_admin_page'
+        );
+    }
+    add_action( 'admin_menu', 'wpbb_child_v65_demo_admin_menu', 80 );
+}
+if ( ! function_exists( 'wpbb_child_v65_demo_admin_page' ) ) {
+    function wpbb_child_v65_demo_admin_page() {
+        if ( ! current_user_can( 'manage_options' ) ) return;
+        $managed = get_posts( array( 'post_type'=>'page', 'post_status'=>'any', 'posts_per_page'=>-1, 'fields'=>'ids', 'meta_key'=>'_wp_theme_demo_managed', 'meta_value'=>'1' ) );
+        $notice = isset( $_GET['wpbb-demo-refreshed'] ) ? '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Managed demo pages refreshed.', 'wp-bbuilder' ) . '</p></div>' : '';
+        echo '<div class="wrap"><h1>' . esc_html__( 'BBuilder Demo', 'wp-bbuilder' ) . '</h1>' . wp_kses_post( $notice );
+        echo '<p>' . esc_html__( 'Demo maintenance is explicit in this release. Existing pages are never silently rewritten just because an administrator opens wp-admin.', 'wp-bbuilder' ) . '</p>';
+        echo '<div class="card" style="max-width:760px;padding:8px 20px 20px"><h2>' . esc_html__( 'Managed demo content', 'wp-bbuilder' ) . '</h2>';
+        echo '<p><strong>' . esc_html( sprintf( _n( '%d managed page detected', '%d managed pages detected', count( $managed ), 'wp-bbuilder' ), count( $managed ) ) ) . '</strong></p>';
+        echo '<p>' . esc_html__( 'Use Refresh only when you intentionally want to rebuild the theme-managed Home, About, Services, Industries and Contact demo pages from the current sector content pack.', 'wp-bbuilder' ) . '</p>';
+        echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="wpbb_child_refresh_demo">';
+        wp_nonce_field( 'wpbb_child_refresh_demo' );
+        submit_button( __( 'Refresh managed demo pages', 'wp-bbuilder' ), 'primary', 'submit', false );
+        echo '</form></div></div>';
+    }
+}
+if ( ! function_exists( 'wpbb_child_v65_handle_demo_refresh' ) ) {
+    function wpbb_child_v65_handle_demo_refresh() {
+        if ( ! current_user_can( 'manage_options' ) ) wp_die( esc_html__( 'You do not have permission to refresh demo content.', 'wp-bbuilder' ) );
+        check_admin_referer( 'wpbb_child_refresh_demo' );
+        wpbb_child_v62_rebuild_demo_pages( true );
+        wp_safe_redirect( add_query_arg( 'wpbb-demo-refreshed', '1', admin_url( 'themes.php?page=wpbb-child-demo' ) ) );
+        exit;
+    }
+    add_action( 'admin_post_wpbb_child_refresh_demo', 'wpbb_child_v65_handle_demo_refresh' );
 }

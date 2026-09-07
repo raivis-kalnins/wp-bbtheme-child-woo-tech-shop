@@ -1,2 +1,13 @@
 <?php /** Title: Tech store promo / Slug: wpbb-tech/tech-promo / Categories: wp-patterns-main, wp-theme-current */ ?>
-<!-- wp:group {"className":"wp-theme-section-shell","layout":{"type":"default"}} --><div class="wp-block-group wp-theme-section-shell"><!-- wp:wpbb/row {"containerClass":"container"} --><!-- wp:wpbb/column {"xs":12} --><!-- wp:group {"className":"tech-promo-panel","layout":{"type":"constrained"}} --><div class="wp-block-group tech-promo-panel"><!-- wp:paragraph {"className":"wp-theme-sector-eyebrow"} --><p class="wp-theme-sector-eyebrow">Workspace edit</p><!-- /wp:paragraph --><!-- wp:heading --><h2 class="wp-block-heading">Build a cleaner home-office setup.</h2><!-- /wp:heading --><!-- wp:paragraph --><p>Pair a USB-C monitor, compact dock and considered accessories with one clear collection.</p><!-- /wp:paragraph --><!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/shop/">Shop the edit</a></div><!-- /wp:button --></div><!-- /wp:buttons --></div><!-- /wp:group --><!-- /wp:wpbb/column --><!-- /wp:wpbb/row --></div><!-- /wp:group -->
+<!-- wp:wpbb/bootstrap-div {"utilityClasses":"wp-theme-section-shell"} -->
+<!-- wp:wpbb/row {"containerClass":"container"} -->
+<!-- wp:wpbb/column {"xs":12} -->
+<!-- wp:wpbb/bootstrap-div {"utilityClasses":"tech-promo-panel"} -->
+<!-- wp:paragraph {"className":"wp-theme-sector-eyebrow"} --><p class="wp-theme-sector-eyebrow">Workspace edit</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Build a cleaner home-office setup.</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Pair a USB-C monitor, compact dock and considered accessories with one clear collection.</p><!-- /wp:paragraph -->
+<!-- wp:wpbb/button {"text":"Shop the edit","url":"/shop/","btnClass":"btn btn-primary"} /-->
+<!-- /wp:wpbb/bootstrap-div -->
+<!-- /wp:wpbb/column -->
+<!-- /wp:wpbb/row -->
+<!-- /wp:wpbb/bootstrap-div -->

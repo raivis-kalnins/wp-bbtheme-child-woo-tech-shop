@@ -15,12 +15,7 @@ $eyebrow = $is_tax ? __( 'Collection', 'wp-theme' ) : __( 'Shop', 'wp-theme' );
   </section>
   <div class="container wp-theme-woo-legacy__body">
     <?php
-    if ( shortcode_exists( 'iws_product_filter' ) && shortcode_exists( 'iws_product_filter_results' ) ) {
-        echo do_shortcode( '[iws_product_filter posts_per_page="12"]' );
-        echo do_shortcode( '[iws_product_filter_results posts_per_page="12"]' );
-    } elseif ( function_exists( 'woocommerce_content' ) ) {
-        woocommerce_content();
-    }
+    echo wpbb_tech_render_native_products_v64();
     ?>
   </div>
 </main>

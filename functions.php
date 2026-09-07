@@ -1036,4 +1036,7 @@ if ( ! function_exists( 'wpbb_child_381063_serve_pwa_endpoint' ) ) {
     }
     add_action( 'template_redirect', 'wpbb_child_381063_serve_pwa_endpoint', -9999 );
 }
-
+// v3.8.10.75 commerce consistency and managed-demo media repair.
+require_once get_stylesheet_directory() . '/inc/v74-commerce.php';
+// v3.8.10.75 structural/media/Woo repair.
+require_once get_stylesheet_directory() . '/inc/v75-suite.php';

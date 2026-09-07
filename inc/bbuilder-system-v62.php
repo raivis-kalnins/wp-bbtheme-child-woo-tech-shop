@@ -1,6 +1,6 @@
 <?php
 /**
- * Shared v3.8.10.65 BBuilder demo/admin consistency layer.
+ * Shared v3.8.10.67 BBuilder demo/admin consistency layer.
  *
  * Goals:
  * - BBuilder Row/Column are the only grid primitives.
@@ -174,12 +174,34 @@ if ( ! function_exists( 'wpbb_child_v62_section_heading' ) ) {
     }
 }
 
+
+/**
+ * v3.8.10.67 full-width section shell with a real Bootstrap container inside.
+ * This mirrors the tested sector-demo structure: section backgrounds span the
+ * viewport while text, cards and media stay on the same content grid.
+ */
+if ( ! function_exists( 'wpbb_child_v67_section' ) ) {
+    function wpbb_child_v67_section( $utility_classes, $inner, $class_name = 'wpbb-v64-section' ) {
+        $outer_classes = trim( 'wpbb-v67-section-shell px-0 ' . (string) $utility_classes );
+        $inner_block = wpbb_child_v62_block(
+            'wpbb/bootstrap-div',
+            array( 'containerClass' => 'container', 'utilityClasses' => 'wpbb-v67-section-inner' ),
+            $inner
+        );
+        return wpbb_child_v62_block(
+            'wpbb/bootstrap-div',
+            array( 'containerClass' => 'container-fluid', 'utilityClasses' => $outer_classes, 'className' => (string) $class_name ),
+            $inner_block
+        );
+    }
+}
+
 if ( ! function_exists( 'wpbb_child_v62_cards_row' ) ) {
     function wpbb_child_v62_cards_row( $items, $class = '', $max_columns = 3, $link_text = '', $link_url = '' ) {
         $items = is_array( $items ) ? $items : array();
         if ( ! $items ) return '';
         $count = count( $items );
-        $lg = $max_columns >= 4 ? 3 : ( $max_columns === 2 ? 6 : 4 );
+        $lg = $max_columns >= 4 ? 3 : ( $max_columns === 3 ? 4 : ( $max_columns === 2 ? 6 : 12 ) );
         if ( $count === 2 ) $lg = 6;
         if ( $count === 1 ) $lg = 12;
         $cols = '';
@@ -321,7 +343,8 @@ if ( ! function_exists( 'wpbb_child_v62_front_content' ) ) {
 
         // Optional sector-specific dynamic block immediately after the hero.
         if ( 'events' === ( $profile['id'] ?? '' ) && shortcode_exists( 'wpbb_event_calendar' ) ) {
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wpbb-events-home-calendar', 'className' => 'wpbb-v64-section' ),
+            $content .= wpbb_child_v67_section(
+                'wp-theme-section-shell wpbb-events-home-calendar',
                 wpbb_child_v62_block( 'wpbb/row', array( 'gutterX' => 'gx-0', 'gutterY' => 'gy-0' ),
                     wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 12 ), wpbb_child_v62_block( 'shortcode', array(), '[wpbb_event_calendar view="list" limit="6"]' ) )
                 )
@@ -332,7 +355,7 @@ if ( ! function_exists( 'wpbb_child_v62_front_content' ) ) {
         if ( $services ) {
             $inner = wpbb_child_v62_section_heading( (string) ( $profile['services_eyebrow'] ?? __( 'Services', 'wp-bbuilder' ) ), (string) ( $profile['services_heading'] ?? __( 'Purpose-built sections, consistent structure.', 'wp-bbuilder' ) ) );
             $inner .= wpbb_child_v62_cards_row( $services, 'wp-theme-sector-card motion-fade-up', 3 );
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wp-theme-services-section', 'className' => 'wpbb-v64-section' ), $inner );
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-services-section', $inner );
         }
 
         if ( $about_image || ! empty( $profile['about_title'] ) ) {
@@ -343,18 +366,18 @@ if ( ! function_exists( 'wpbb_child_v62_front_content' ) ) {
             if ( $secondary_label && $secondary_url ) {
                 $right .= wpbb_child_v62_block( 'wpbb/button', array( 'text' => $secondary_label, 'url' => $secondary_url, 'btnClass' => 'btn btn-primary' ), '', true );
             }
-            $about_row = wpbb_child_v62_block( 'wpbb/row', array( 'customClasses' => 'align-items-center wp-theme-sector-media-text', 'gutterX' => 'gx-5', 'gutterY' => 'gy-5' ),
+            $about_row = wpbb_child_v62_block( 'wpbb/row', array( 'customClasses' => 'align-items-start wp-theme-sector-media-text', 'gutterX' => 'gx-5', 'gutterY' => 'gy-5' ),
                 wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 12, 'lg' => 6 ), $left ) .
                 wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 12, 'lg' => 6 ), $right )
             );
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wp-theme-about-section', 'className' => 'wpbb-v64-section' ), $about_row );
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-about-section', $about_row );
         }
 
         $industries = (array) ( $profile['industries'] ?? array() );
         if ( $industries ) {
             $inner = wpbb_child_v62_section_heading( (string) ( $profile['industries_eyebrow'] ?? __( 'Solutions', 'wp-bbuilder' ) ), (string) ( $profile['industries_heading'] ?? __( 'Built around real use cases.', 'wp-bbuilder' ) ) );
             $inner .= wpbb_child_v62_cards_row( $industries, 'wp-theme-sector-card motion-fade-up', 4 );
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wp-theme-industries-section', 'className' => 'wpbb-v64-section' ), $inner );
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-industries-section', $inner );
         }
 
         $stats = (array) ( $profile['stats'] ?? array() );
@@ -363,7 +386,7 @@ if ( ! function_exists( 'wpbb_child_v62_front_content' ) ) {
             foreach ( array_slice( $stats, 0, 4 ) as $stat ) {
                 $cols .= wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 6, 'lg' => 3 ), wpbb_child_v62_block( 'wpbb/fun-fact', array( 'number' => (string) ( $stat[0] ?? '' ), 'label' => (string) ( $stat[1] ?? '' ), 'styleVariant' => 'sector-proof', 'className' => 'wp-theme-sector-proof__item' ), '', true ) );
             }
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-home-stats', 'className' => 'wpbb-v64-section' ), wpbb_child_v62_block( 'wpbb/row', array( 'gutterX' => 'gx-3', 'gutterY' => 'gy-3' ), $cols ) );
+            $content .= wpbb_child_v67_section( 'wp-theme-home-stats', wpbb_child_v62_block( 'wpbb/row', array( 'gutterX' => 'gx-3', 'gutterY' => 'gy-3' ), $cols ) );
         }
 
         // Gallery/portfolio carousel uses the same sector-specific media, not abstract placeholders.
@@ -376,13 +399,13 @@ if ( ! function_exists( 'wpbb_child_v62_front_content' ) ) {
         if ( $gallery_slides ) {
             $inner = wpbb_child_v62_section_heading( (string) ( $profile['gallery_eyebrow'] ?? __( 'Gallery', 'wp-bbuilder' ) ), (string) ( $profile['gallery_heading'] ?? __( 'A closer look at the work, people and places behind the service.', 'wp-bbuilder' ) ) );
             $inner .= wpbb_child_v62_block( 'wpbb/row', array(), wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 12 ), wpbb_child_v62_block( 'wpbb/swiper', array( 'slides' => $gallery_slides, 'slidesJson' => wp_json_encode( $gallery_slides, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ), 'slidesPerView' => 3, 'slidesTablet' => 2, 'slidesMobile' => 1, 'spaceBetween' => 22, 'speed' => 650, 'demoStyle' => 'gallery', 'showNavigation' => false ), '', true ) ) );
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wp-theme-gallery-section', 'className' => 'wpbb-v64-section' ), $inner );
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-gallery-section', $inner );
         }
 
         if ( ! empty( $profile['commerce'] ) ) {
             $inner = wpbb_child_v62_section_heading( (string) ( $profile['shop_eyebrow'] ?? __( 'Shop', 'wp-bbuilder' ) ), (string) ( $profile['shop_heading'] ?? __( 'Find the right product without the noise.', 'wp-bbuilder' ) ) );
             $inner .= wpbb_child_v62_block( 'wpbb/row', array(), wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 12 ), wpbb_child_v62_block( 'wpbb/catalogue', array( 'title' => '', 'postsToShow' => 8, 'postType' => 'product', 'taxonomy' => 'product_cat', 'sortBy' => 'menu_order', 'sortOrder' => 'ASC', 'className' => 'wp-theme-home-product-catalogue' ), '', true ) ) );
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wp-theme-shop-section', 'className' => 'wpbb-v64-section' ), $inner );
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-shop-section', $inner );
         }
 
         $process = (array) ( $profile['process'] ?? array() );
@@ -391,7 +414,7 @@ if ( ! function_exists( 'wpbb_child_v62_front_content' ) ) {
             foreach ( $process as $item ) $cards[] = array( trim( (string) ( $item[0] ?? '' ) . ' ' . (string) ( $item[1] ?? '' ) ), (string) ( $item[2] ?? '' ) );
             $inner = wpbb_child_v62_section_heading( (string) ( $profile['process_eyebrow'] ?? __( 'How it works', 'wp-bbuilder' ) ), (string) ( $profile['process_heading'] ?? __( 'A clear next step.', 'wp-bbuilder' ) ) );
             $inner .= wpbb_child_v62_cards_row( $cards, 'wp-theme-sector-card wp-theme-process-card motion-fade-up', 3 );
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wp-theme-process-section', 'className' => 'wpbb-v64-section' ), $inner );
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-process-section', $inner );
         }
 
         $faq_heading = (string) ( $profile['faq_heading'] ?? '' );
@@ -402,7 +425,7 @@ if ( ! function_exists( 'wpbb_child_v62_front_content' ) ) {
                 $details .= wpbb_child_v62_block( 'details', array(), '<details class="wp-block-details"><summary>' . esc_html( $faq[0] ) . '</summary>' . wpbb_child_v62_paragraph( $faq[1] ) . '</details>' );
             }
             $faq_inner = wpbb_child_v62_paragraph( __( 'FAQ', 'wp-bbuilder' ), 'wp-theme-sector-eyebrow' ) . wpbb_child_v62_heading( $faq_heading, 2 ) . $details;
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array( 'containerClass' => 'container', 'utilityClasses' => 'wp-theme-section-shell wp-theme-faq-section', 'className' => 'wpbb-v64-section' ), wpbb_child_v62_block( 'wpbb/row', array(), wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 12 ), $faq_inner ) ) );
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-faq-section', wpbb_child_v62_block( 'wpbb/row', array(), wpbb_child_v62_block( 'wpbb/column', array( 'xs' => 12 ), $faq_inner ) ) );
         }
 
         if ( ! empty( $profile['cta_title'] ) ) {
@@ -461,41 +484,41 @@ if ( ! function_exists( 'wpbb_child_v62_simple_page_content' ) ) {
         $about_image = (string) ( $profile['about_image'] ?? $profile['hero_image'] ?? '' );
 
         if ( 'services' === $key ) {
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wpbb-v64-page-hero'),
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wpbb-v64-page-hero',
                 wpbb_child_v62_section_heading( (string)($profile['services_eyebrow']??$label), (string)($profile['services_heading']??$label) ) );
-            $content .= wpbb_child_v62_block( 'wpbb/bootstrap-div', array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-services-section'),
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-services-section',
                 wpbb_child_v62_cards_row( (array)($profile['services']??array()), 'wp-theme-sector-card motion-fade-up', 3 ) );
             $media = wpbb_child_v62_block('wpbb/row',array('customClasses'=>'align-items-center','gutterX'=>'gx-5','gutterY'=>'gy-5'),
                 wpbb_child_v62_block('wpbb/column',array('xs'=>12,'lg'=>6),wpbb_child_v62_image($about_image,'wp-theme-sector-media-text__media')) .
                 wpbb_child_v62_block('wpbb/column',array('xs'=>12,'lg'=>6),wpbb_child_v62_paragraph((string)($profile['about_eyebrow']??__('Approach','wp-bbuilder')),'wp-theme-sector-eyebrow').wpbb_child_v62_heading((string)($profile['about_title']??''),2).wpbb_child_v62_paragraph((string)($profile['about_text']??'')))
             );
-            $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-about-section'),$media);
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-about-section', $media );
             if ( !empty($profile['process']) ) {
                 $cards=array(); foreach((array)$profile['process'] as $p) $cards[]=array(trim((string)($p[0]??'').' '.(string)($p[1]??'')),(string)($p[2]??''));
-                $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-process-section'), wpbb_child_v62_section_heading((string)($profile['process_eyebrow']??__('How it works','wp-bbuilder')),(string)($profile['process_heading']??'')) . wpbb_child_v62_cards_row($cards,'wp-theme-sector-card wp-theme-process-card',3));
+                $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-process-section', wpbb_child_v62_section_heading((string)($profile['process_eyebrow']??__('How it works','wp-bbuilder')),(string)($profile['process_heading']??'')) . wpbb_child_v62_cards_row($cards,'wp-theme-sector-card wp-theme-process-card',3));
             }
             $content .= wpbb_child_v64_cta($profile);
         } elseif ( 'industries' === $key ) {
-            $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wpbb-v64-page-hero'),wpbb_child_v62_section_heading((string)($profile['industries_eyebrow']??$label),(string)($profile['industries_heading']??$label)));
-            $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-industries-section'),wpbb_child_v62_cards_row((array)($profile['industries']??array()),'wp-theme-sector-card motion-fade-up',4));
-            if (!empty($profile['stats'])) $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-home-stats'),wpbb_child_v64_stats_row($profile['stats']));
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wpbb-v64-page-hero', wpbb_child_v62_section_heading((string)($profile['industries_eyebrow']??$label),(string)($profile['industries_heading']??$label)));
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-industries-section', wpbb_child_v62_cards_row((array)($profile['industries']??array()),'wp-theme-sector-card motion-fade-up',4));
+            if (!empty($profile['stats'])) $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-home-stats', wpbb_child_v64_stats_row($profile['stats']) );
             $content .= wpbb_child_v64_cta($profile);
         } elseif ( 'about' === $key ) {
-            $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wpbb-v64-page-hero'),wpbb_child_v62_section_heading((string)($profile['about_eyebrow']??$label),(string)($profile['about_title']??$label)));
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wpbb-v64-page-hero', wpbb_child_v62_section_heading((string)($profile['about_eyebrow']??$label),(string)($profile['about_title']??$label)));
             $row = wpbb_child_v62_block('wpbb/column',array('xs'=>12,'lg'=>6),wpbb_child_v62_image($about_image,'wp-theme-sector-media-text__media'));
             $row .= wpbb_child_v62_block('wpbb/column',array('xs'=>12,'lg'=>6),wpbb_child_v62_paragraph((string)($profile['about_eyebrow']??$label),'wp-theme-sector-eyebrow').wpbb_child_v62_heading((string)($profile['about_title']??$label),2).wpbb_child_v62_paragraph((string)($profile['about_text']??$profile['hero_text']??'')));
-            $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-about-section'),wpbb_child_v62_block('wpbb/row',array('customClasses'=>'align-items-center','gutterX'=>'gx-5','gutterY'=>'gy-5'),$row));
-            if (!empty($profile['stats'])) $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-home-stats'),wpbb_child_v64_stats_row($profile['stats']));
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-about-section', wpbb_child_v62_block('wpbb/row',array('customClasses'=>'align-items-start wp-theme-sector-media-text','gutterX'=>'gx-5','gutterY'=>'gy-5'),$row) );
+            if (!empty($profile['stats'])) $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-home-stats', wpbb_child_v64_stats_row($profile['stats']) );
             $values = array_slice((array)($profile['industries']??array()),0,3);
-            if($values) $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell'),wpbb_child_v62_section_heading(__('What matters here','wp-bbuilder'),(string)($profile['priorities_heading']??__('Useful structure for the sector.','wp-bbuilder'))).wpbb_child_v62_cards_row($values,'wp-theme-sector-card',3));
-            if(!empty($profile['process'])) { $cards=array(); foreach((array)$profile['process'] as $p) $cards[]=array(trim((string)($p[0]??'').' '.(string)($p[1]??'')),(string)($p[2]??'')); $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-process-section'),wpbb_child_v62_section_heading((string)($profile['process_eyebrow']??__('How it works','wp-bbuilder')),(string)($profile['process_heading']??'')).wpbb_child_v62_cards_row($cards,'wp-theme-sector-card wp-theme-process-card',3)); }
+            if($values) $content .= wpbb_child_v67_section( 'wp-theme-section-shell', wpbb_child_v62_section_heading(__('What matters here','wp-bbuilder'),(string)($profile['priorities_heading']??__('Useful structure for the sector.','wp-bbuilder'))).wpbb_child_v62_cards_row($values,'wp-theme-sector-card',3));
+            if(!empty($profile['process'])) { $cards=array(); foreach((array)$profile['process'] as $p) $cards[]=array(trim((string)($p[0]??'').' '.(string)($p[1]??'')),(string)($p[2]??'')); $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-process-section', wpbb_child_v62_section_heading((string)($profile['process_eyebrow']??__('How it works','wp-bbuilder')),(string)($profile['process_heading']??'')).wpbb_child_v62_cards_row($cards,'wp-theme-sector-card wp-theme-process-card',3)); }
             $content .= wpbb_child_v64_cta($profile);
         } elseif ( 'contact' === $key ) {
             $contact_heading = (string) ( $profile['contact_heading'] ?? __( 'Talk to the right person and get a useful response.', 'wp-bbuilder' ) );
             $contact_text = (string) ( $profile['contact_text'] ?? '' );
             $hero_inner = wpbb_child_v62_section_heading( __( 'Contact', 'wp-bbuilder' ), $contact_heading );
             if ( $contact_text ) $hero_inner .= wpbb_child_v62_block( 'wpbb/row', array( 'gutterX'=>'gx-4','gutterY'=>'gy-3' ), wpbb_child_v62_block( 'wpbb/column', array( 'xs'=>12,'lg'=>8 ), wpbb_child_v62_paragraph( $contact_text, 'wpbb-v64-contact-intro' ) ) );
-            $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wpbb-v64-page-hero'),$hero_inner);
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wpbb-v64-page-hero', $hero_inner );
             $services = array_values( (array) ( $profile['services'] ?? array() ) );
             $contact_items = array();
             foreach ( array_slice( $services, 0, 3 ) as $service ) {
@@ -507,7 +530,7 @@ if ( ! function_exists( 'wpbb_child_v62_simple_page_content' ) ) {
             $fields=wpbb_child_v64_contact_fields($profile);
             $form=wpbb_child_v62_block('wpbb/dynamic-form',array('formTitle'=>__('Send us a message','wp-bbuilder'),'showTitle'=>true,'submitText'=>__('Send message','wp-bbuilder'),'stylePreset'=>'soft','buttonClass'=>'btn btn-primary','fields'=>$fields,'fieldsJson'=>wp_json_encode($fields,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),'className'=>'wp-theme-contact-form'),'',true);
             $row=wpbb_child_v62_block('wpbb/column',array('xs'=>12,'lg'=>5),$left).wpbb_child_v62_block('wpbb/column',array('xs'=>12,'lg'=>7),$form);
-            $content .= wpbb_child_v62_block('wpbb/bootstrap-div',array('containerClass'=>'container','utilityClasses'=>'wp-theme-section-shell wp-theme-contact-section'),wpbb_child_v62_block('wpbb/row',array('gutterX'=>'gx-5','gutterY'=>'gy-5','customClasses'=>'align-items-start'),$row));
+            $content .= wpbb_child_v67_section( 'wp-theme-section-shell wp-theme-contact-section', wpbb_child_v62_block('wpbb/row',array('gutterX'=>'gx-5','gutterY'=>'gy-5','customClasses'=>'align-items-start'),$row) );
         }
         return $content;
     }
@@ -564,16 +587,16 @@ if ( ! function_exists( 'wpbb_child_v62_rebuild_demo_pages' ) ) {
         $front_probe = absint( get_option( 'page_on_front' ) );
         $front_probe_content = $front_probe ? (string) get_post_field( 'post_content', $front_probe, 'raw' ) : '';
         $needs_placeholder_repair = $front_probe && wpbb_child_v62_has_placeholder_dynamic_blocks( $front_probe_content );
-        if ( ! $force && ! $needs_placeholder_repair && '3.8.10.65' === (string) get_option( $done_key ) ) return;
+        if ( ! $force && ! $needs_placeholder_repair && '3.8.10.67' === (string) get_option( $done_key ) ) return;
         $profile = wpbb_child_v62_profile();
-        if ( empty( $profile['id'] ) ) { update_option( $done_key, '3.8.10.65', false ); return; }
+        if ( empty( $profile['id'] ) ) { update_option( $done_key, '3.8.10.67', false ); return; }
 
         $front = absint( get_option( 'page_on_front' ) );
         if ( $front && wpbb_child_v62_is_managed_demo_page( $front ) ) {
             $clean = wpbb_child_v62_front_content( $profile );
             if ( $clean ) {
                 wp_update_post( array( 'ID' => $front, 'post_content' => $clean ) );
-                update_post_meta( $front, '_wpbb_child_bbuilder_version', '3.8.10.65' );
+                update_post_meta( $front, '_wpbb_child_bbuilder_version', '3.8.10.67' );
                 update_post_meta( $front, '_wp_theme_demo_managed', '1' );
                 clean_post_cache( $front );
             }
@@ -588,7 +611,7 @@ if ( ! function_exists( 'wpbb_child_v62_rebuild_demo_pages' ) ) {
             $clean = wpbb_child_v62_simple_page_content( $profile, $key );
             if ( $clean ) {
                 wp_update_post( array( 'ID' => $page->ID, 'post_content' => $clean ) );
-                update_post_meta( $page->ID, '_wpbb_child_bbuilder_version', '3.8.10.65' );
+                update_post_meta( $page->ID, '_wpbb_child_bbuilder_version', '3.8.10.67' );
                 update_post_meta( $page->ID, '_wp_theme_demo_managed', '1' );
             }
         }
@@ -601,9 +624,9 @@ if ( ! function_exists( 'wpbb_child_v62_rebuild_demo_pages' ) ) {
             $content = (string) get_post_field( 'post_content', $page_id, 'raw' );
             $fixed = wpbb_child_v62_repair_serialized_content( $content );
             if ( $fixed !== $content ) wp_update_post( array( 'ID'=>$page_id, 'post_content'=>$fixed ) );
-            update_post_meta( $page_id, '_wpbb_child_bbuilder_version', '3.8.10.65' );
+            update_post_meta( $page_id, '_wpbb_child_bbuilder_version', '3.8.10.67' );
         }
-        update_option( $done_key, '3.8.10.65', false );
+        update_option( $done_key, '3.8.10.67', false );
     }
 }
 
@@ -627,7 +650,7 @@ if ( ! function_exists( 'wpbb_child_v62_enqueue_system_css' ) ) {
     function wpbb_child_v62_enqueue_system_css() {
         $path = get_stylesheet_directory() . '/assets/theme-system-v62.css';
         if ( is_readable( $path ) ) {
-            wp_enqueue_style( 'wpbb-child-system-v62', get_stylesheet_directory_uri() . '/assets/theme-system-v62.css', array(), '3.8.10.65' );
+            wp_enqueue_style( 'wpbb-child-system-v62', get_stylesheet_directory_uri() . '/assets/theme-system-v62.css', array(), '3.8.10.67' );
         }
     }
     add_action( 'wp_enqueue_scripts', 'wpbb_child_v62_enqueue_system_css', 140 );

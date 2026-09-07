@@ -282,3 +282,72 @@ form label,.woocommerce form .form-row label{display:block;margin-bottom:.35rem;
 
 /* Tech catalogue: show the whole device cleanly inside the product card. */
 .woocommerce ul.products li.product a img,.wp-theme-store-grid ul.products li.product a img{aspect-ratio:4/3;object-fit:contain;background:#f7f8fb;padding:14px}
+
+/* v3.8.10.67 shared demo rhythm + alignment repair.
+ * One vertical rhythm, full-width section shells, stable Bootstrap inner grids. */
+:root{
+  --wpbb-demo-section-y:clamp(54px,5vw,76px);
+  --wpbb-demo-section-y-compact:clamp(38px,4vw,56px);
+  --wpbb-demo-heading-gap:clamp(26px,3vw,38px);
+}
+#wp-theme-main .wpbb-v64-section,
+#wp-theme-main .wpbb-v64-page-hero{margin-block:0}
+#wp-theme-main .wpbb-v67-section-shell.container-fluid{width:100%;max-width:none;margin-inline:0;padding-inline:0}
+#wp-theme-main .wpbb-v67-section-inner.container{width:100%;margin-inline:auto}
+#wp-theme-main .wp-theme-section-shell{padding-top:var(--wpbb-demo-section-y);padding-bottom:var(--wpbb-demo-section-y)}
+#wp-theme-main .wp-theme-section-shell.wpbb-v64-page-hero{padding-top:clamp(46px,4.5vw,66px);padding-bottom:clamp(46px,4.5vw,66px)}
+#wp-theme-main .wp-theme-home-stats{margin:0;padding-top:var(--wpbb-demo-section-y-compact);padding-bottom:var(--wpbb-demo-section-y-compact)}
+#wp-theme-main .wp-theme-section-heading{margin-bottom:var(--wpbb-demo-heading-gap);align-items:flex-end;row-gap:18px}
+#wp-theme-main .wp-theme-section-heading>.wpbb-column,
+#wp-theme-main .wp-theme-section-heading>[class*="col-"]{min-width:0}
+#wp-theme-main .wp-theme-section-heading>.wpbb-column>:last-child,
+#wp-theme-main .wp-theme-section-heading>[class*="col-"]>:last-child{margin-bottom:0}
+#wp-theme-main .wpbb-v62-card-grid{align-items:stretch}
+#wp-theme-main .wpbb-v62-card-grid>.wpbb-column{display:flex;align-items:stretch;min-width:0}
+#wp-theme-main .wpbb-v62-card-grid .wpbb-icon-card{width:100%;height:100%;min-width:0}
+#wp-theme-main .wpbb-v62-card-grid .wpbb-icon-card .card-body{display:flex;flex:1 1 auto;flex-direction:column;width:100%;padding:clamp(22px,2vw,28px)}
+#wp-theme-main .wpbb-v62-card-grid .wpbb-icon-card__action{margin-top:auto}
+#wp-theme-main .wpbb-v62-card-grid .wpbb-icon-card__text{margin-bottom:0}
+#wp-theme-main .wp-theme-sector-media-text{align-items:flex-start!important}
+#wp-theme-main .wp-theme-sector-media-text>.wpbb-column,
+#wp-theme-main .wp-theme-sector-media-text>[class*="col-"]{align-self:flex-start;min-width:0}
+#wp-theme-main .wp-theme-sector-media-text__media{width:100%;margin:0;overflow:hidden;border-radius:clamp(14px,2vw,22px)}
+#wp-theme-main .wp-theme-sector-media-text__media img{display:block;width:100%;height:auto!important;min-height:0!important;max-height:540px;aspect-ratio:4/3!important;object-fit:cover;object-position:center}
+#wp-theme-main .wp-theme-sector-media-text>.wpbb-column:last-child>:last-child{margin-bottom:0}
+#wp-theme-main .wp-theme-home-stats .wpbb-row{align-items:stretch}
+#wp-theme-main .wp-theme-home-stats .wpbb-column{display:flex;min-width:0}
+#wp-theme-main .wp-theme-home-stats .wpbb-fun-fact{width:100%;height:100%}
+#wp-theme-main .wp-theme-faq-section .wp-block-details:first-of-type{margin-top:6px}
+#wp-theme-main .wp-theme-faq-section .wp-block-details:last-child{margin-bottom:0}
+
+/* The BBuilder catalogue has its own heading row. The sector section already
+ * supplies the heading, so remove only the generated empty row and make the
+ * eight-item commerce demo a balanced 4 x 2 grid on wide screens. */
+#wp-theme-main .wp-theme-home-product-catalogue>.row{align-items:stretch}
+#wp-theme-main .wp-theme-home-product-catalogue>.row>.col-md-6.col-lg-4{display:flex;min-width:0}
+#wp-theme-main .wp-theme-home-product-catalogue .wpbb-catalogue-card{display:flex;width:100%;height:100%;flex-direction:column;overflow:hidden}
+#wp-theme-main .wp-theme-home-product-catalogue .wpbb-catalogue-card .card-body{display:flex;flex:1 1 auto;flex-direction:column;min-width:0;padding:clamp(18px,1.8vw,24px)}
+#wp-theme-main .wp-theme-home-product-catalogue .wpbb-catalogue-card .card-title{line-height:1.25}
+#wp-theme-main .wp-theme-home-product-catalogue .wpbb-catalogue-card .card-text{margin-bottom:18px;line-height:1.6}
+#wp-theme-main .wp-theme-home-product-catalogue .wpbb-catalogue-card .btn{margin-top:auto;align-self:flex-start}
+#wp-theme-main .wp-theme-home-product-catalogue>.row>.col-12:first-child:has(>h3:empty){display:none}
+@media(min-width:1200px){
+  #wp-theme-main .wp-theme-home-product-catalogue>.row>.col-md-6.col-lg-4{flex:0 0 auto;width:25%}
+  #wp-theme-main .wpbb-v62-card-grid .wpbb-icon-card__title{min-height:2.4em}
+}
+@media(max-width:991.98px){
+  #wp-theme-main .wp-theme-sector-media-text__media img{max-height:none}
+}
+@media(max-width:767.98px){
+  :root{--wpbb-demo-section-y:52px;--wpbb-demo-section-y-compact:36px;--wpbb-demo-heading-gap:26px}
+  #wp-theme-main .wp-theme-section-shell.wpbb-v64-page-hero{padding-top:44px;padding-bottom:44px}
+  #wp-theme-main .wp-theme-sector-media-text__media img{aspect-ratio:16/11!important}
+  #wp-theme-main .wpbb-v62-card-grid .wpbb-icon-card .card-body{padding:22px}
+}
+
+/* v3.8.10.67 Tech BBuilder catalogue media: keep complete devices visible. */
+#wp-theme-main .wp-theme-home-product-catalogue .wpbb-catalogue-card .card-img-top{
+  display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;
+  object-position:center;background:#f7f8fb;padding:14px;border-bottom:1px solid rgba(15,23,42,.06)
+}
+

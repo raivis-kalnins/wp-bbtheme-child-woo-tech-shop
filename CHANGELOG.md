@@ -1,10 +1,17 @@
 ## 3.8.10.65
+
+## 3.8.10.67
+- Restored full-width demo section shells with an inner Bootstrap container.
+- Removed duplicate section margins/padding and aligned cards, media rows, stats and BBuilder catalogue grids.
+- Added responsive layout fixes shared by all sector demos.
+
 - Upgraded demo-page structure for WP BBuilder 5.6.4: Bootstrap Row/Column layout, Div wrappers only where needed, and reusable Icon Cards for simple feature cards.
 - Added one-time cleanup of legacy Group/Columns blocks, malformed demo row markup and duplicate top-level starter sections.
 - Normalised card heights, CTA/button alignment, form controls and shared WooCommerce archive/cart/checkout/account spacing.
 - Added matching editor-side system styles so demo pages are easier to understand and edit in Gutenberg.
 
 # Changelog
+- Fixed one-column demo card rows (notably Contact) so cards use full available column width.
 
 ## 3.8.10.65
 - Fixed the Theme Settings General-tab password panel so its CSS is loaded as admin CSS rather than displayed as text.

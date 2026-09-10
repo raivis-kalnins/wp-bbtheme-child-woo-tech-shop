@@ -1,10 +1,5 @@
 <?php
-/**
- * Complete classic WooCommerce single-product shell.
- * v3.8.10.75 explicitly initialises the WC_Product global before firing hooks;
- * this is required by gallery/price/add-to-cart modules when a block theme
- * resolves into this PHP compatibility template.
- */
+/** Stable classic WooCommerce single-product shell — suite 3.8.11.07. */
 defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
@@ -24,14 +19,23 @@ get_header();
       <article id="product-<?php the_ID(); ?>" <?php wc_product_class( 'wpbb-complete-product', $product ); ?>>
         <div class="wpbb-complete-product__main">
           <section class="wpbb-complete-product__media" aria-label="<?php esc_attr_e( 'Product gallery', 'woocommerce' ); ?>">
-            <?php do_action( 'woocommerce_before_single_product_summary' ); ?>
+            <?php
+            if ( function_exists( 'wpbb_child_v107_render_product_media' ) ) wpbb_child_v107_render_product_media();
+            elseif ( function_exists( 'woocommerce_show_product_images' ) ) woocommerce_show_product_images();
+            ?>
           </section>
           <section class="summary entry-summary wpbb-complete-product__summary">
-            <?php do_action( 'woocommerce_single_product_summary' ); ?>
+            <?php
+            if ( function_exists( 'wpbb_child_v107_render_product_summary' ) ) wpbb_child_v107_render_product_summary();
+            else do_action( 'woocommerce_single_product_summary' );
+            ?>
           </section>
         </div>
         <div class="wpbb-complete-product__lower">
-          <?php do_action( 'woocommerce_after_single_product_summary' ); ?>
+          <?php
+          if ( function_exists( 'wpbb_child_v107_render_product_lower' ) ) wpbb_child_v107_render_product_lower();
+          else do_action( 'woocommerce_after_single_product_summary' );
+          ?>
         </div>
       </article>
       <?php do_action( 'woocommerce_after_single_product' ); ?>

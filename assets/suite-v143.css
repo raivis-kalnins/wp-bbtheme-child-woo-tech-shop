@@ -1,0 +1,334 @@
+/* Tech Shop 3.8.11.43 — screenshot-led homepage + WooCommerce correction pass. */
+:root{
+  --wpbb-v143-edge-left:var(--wpbb-v137-left,24px);
+  --wpbb-v143-edge-right:var(--wpbb-v137-right,24px);
+  --wpbb-v143-line:#dfe6ef;
+  --wpbb-v143-soft:#f5f8fd;
+  --wpbb-v143-ink:#10254c;
+  --wpbb-v143-copy:#52657a;
+  --wpbb-v143-accent:var(--sector-primary,#1d63ed);
+}
+
+/* HOME — hero uses the same measured content edge as the header and page sections. */
+html body.wpbb-v143.home #wp-theme-main .wp-theme-sector-hero,
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero,
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero > .swiper,
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .swiper-wrapper{
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+  height:auto!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide--hero{
+  box-sizing:border-box!important;
+  min-height:clamp(440px,34vw,500px)!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content{
+  box-sizing:border-box!important;
+  width:auto!important;
+  max-width:none!important;
+  min-height:clamp(440px,34vw,500px)!important;
+  margin-left:var(--wpbb-v143-edge-left)!important;
+  margin-right:var(--wpbb-v143-edge-right)!important;
+  padding:44px 0 64px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media{
+  top:0!important;
+  right:0!important;
+  bottom:0!important;
+  left:auto!important;
+  height:auto!important;
+  min-height:100%!important;
+  margin:0!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-v138-hero-pagination{
+  bottom:12px!important;
+}
+
+/* Remove the loose white band after the hero and keep proof/category content rhythmic. */
+html body.wpbb-v143.home #wp-theme-main .wp-theme-partners-section{
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:24px var(--wpbb-v143-edge-right) 16px var(--wpbb-v143-edge-left)!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wp-theme-partners-section > :is(.container,.container-fluid){
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v143.home #wp-theme-main .tech-spec-strip{
+  box-sizing:border-box!important;
+  width:auto!important;
+  max-width:none!important;
+  margin:14px var(--wpbb-v143-edge-right) 0 var(--wpbb-v143-edge-left)!important;
+  padding:0!important;
+}
+html body.wpbb-v143.home #wp-theme-main .tech-category-section{
+  padding-top:48px!important;
+  padding-bottom:52px!important;
+}
+html body.wpbb-v143.home #wp-theme-main .tech-category-section .wp-theme-section-heading{
+  margin-bottom:24px!important;
+}
+
+/* About/media row: the screenshot showed a full-width image followed by text.
+   Restore the intended 50/50 desktop relationship without changing the DOM. */
+html body.wpbb-v143.home #wp-theme-main .wp-theme-about-section .wp-theme-sector-media-text{
+  --bs-gutter-x:0!important;
+  --bs-gutter-y:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;
+  gap:clamp(28px,4vw,54px)!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  align-items:center!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wp-theme-about-section .wp-theme-sector-media-text > :is(.wpbb-column,[class*="col-"]){
+  box-sizing:border-box!important;
+  float:none!important;
+  flex:none!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  align-self:center!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wp-theme-about-section .wp-theme-sector-media-text__media{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border-radius:18px!important;
+  background:var(--wpbb-v143-soft)!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wp-theme-about-section .wp-theme-sector-media-text__media img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:430px!important;
+  aspect-ratio:16/10!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+
+/* Promo panel contrast — imported dark panels must never inherit dark headings/copy. */
+html body.wpbb-v143.home #wp-theme-main .tech-promo-panel{
+  box-sizing:border-box!important;
+  width:100%!important;
+  margin:0!important;
+  padding:clamp(30px,4vw,48px)!important;
+  background:#0f2345!important;
+  color:#dce6f5!important;
+}
+html body.wpbb-v143.home #wp-theme-main .tech-promo-panel :is(h1,h2,h3,h4,p,strong,span){
+  color:#fff!important;
+}
+html body.wpbb-v143.home #wp-theme-main .tech-promo-panel .wp-theme-sector-eyebrow{color:#8fc2ff!important}
+html body.wpbb-v143.home #wp-theme-main .tech-promo-panel p:not(.wp-theme-sector-eyebrow){color:#dce6f5!important}
+
+/* Gallery: consistent high-quality landscape presentation. v143 JS supplies distinct images. */
+html body.wpbb-v143.home #wp-theme-main .wp-theme-gallery-section .wpbb-swiper--gallery .wpbb-swiper-slide,
+html body.wpbb-v143.home #wp-theme-main .wp-theme-gallery-section .wp-theme-gallery-card{
+  min-height:0!important;
+  height:auto!important;
+  overflow:hidden!important;
+  border-radius:14px!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wp-theme-gallery-section :is(.wpbb-swiper-slide__media,.wp-theme-gallery-card figure){
+  position:relative!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:16/10!important;
+  overflow:hidden!important;
+}
+html body.wpbb-v143.home #wp-theme-main .wp-theme-gallery-section :is(.wpbb-swiper-slide__media img,.wp-theme-gallery-card img){
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+
+/* WOO — one predictable page edge. */
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy .wp-theme-woo-legacy__body{
+  box-sizing:border-box!important;
+  width:min(calc(100% - 48px),1320px)!important;
+  max-width:1320px!important;
+  margin-inline:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* Single product: balanced top columns, real product media, stable tabs, compact related cards. */
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .wpbb-complete-product__main{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.04fr) minmax(380px,.96fr)!important;
+  gap:32px!important;
+  align-items:stretch!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.wpbb-complete-product__media,.wpbb-complete-product__summary,.summary.entry-summary){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  margin:0!important;
+  padding:24px!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .wpbb-complete-product__summary{
+  position:static!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .product_title{
+  font-size:clamp(34px,3vw,44px)!important;
+  line-height:1.02!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .woocommerce-product-gallery__image{
+  display:grid!important;
+  place-items:center!important;
+  min-height:0!important;
+  aspect-ratio:4/3!important;
+  overflow:hidden!important;
+  background:var(--wpbb-v143-soft)!important;
+  border-radius:12px!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .woocommerce-product-gallery__image img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:520px!important;
+  margin:0!important;
+  padding:18px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  border-radius:0!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .wpbb-complete-product__lower{
+  width:100%!important;
+  max-width:none!important;
+  margin-top:32px!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .woocommerce-tabs{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:24px!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .woocommerce-tabs .wc-tab{
+  display:none!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .woocommerce-tabs .wc-tab.wpbb-v143-active{
+  display:block!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .woocommerce-tabs .wc-tab > :first-child{margin-top:0!important}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .woocommerce-tabs .wc-tab > :last-child{margin-bottom:0!important}
+
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.related.products,.upsells.products){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:28px 0 0!important;
+  padding:24px!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.related.products,.upsells.products) ul.products{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:22px!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.related.products,.upsells.products) ul.products > li.product{
+  box-sizing:border-box!important;
+  float:none!important;
+  clear:none!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  margin:0!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.related.products,.upsells.products) ul.products > li.product img{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:4/3!important;
+  margin:0 0 14px!important;
+  padding:16px!important;
+  object-fit:contain!important;
+  background:var(--wpbb-v143-soft)!important;
+}
+
+/* My Account: robust login/register and logged-in endpoint layouts. */
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account .wp-theme-woo-legacy__body{
+  min-height:420px!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account #customer_login{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:24px!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account #customer_login > :is(.u-column1,.u-column2,.col-1,.col-2){
+  box-sizing:border-box!important;
+  float:none!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:24px!important;
+  border:1px solid var(--wpbb-v143-line)!important;
+  border-radius:14px!important;
+  background:#fff!important;
+}
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account .woocommerce:has(> .woocommerce-MyAccount-navigation),
+html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account .woocommerce.wpbb-v109-account-grid{
+  display:grid!important;
+  grid-template-columns:minmax(220px,250px) minmax(0,1fr)!important;
+  gap:24px!important;
+  align-items:start!important;
+  width:100%!important;
+}
+
+@media(max-width:991.98px){
+  html body.wpbb-v143.home #wp-theme-main .wp-theme-about-section .wp-theme-sector-media-text{grid-template-columns:1fr!important;gap:24px!important}
+  html body.wpbb-v143.home #wp-theme-main .wp-theme-about-section .wp-theme-sector-media-text__media img{max-height:none!important;aspect-ratio:16/10!important}
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product .wpbb-complete-product__main{grid-template-columns:1fr!important;gap:24px!important}
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.related.products,.upsells.products) ul.products{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account .woocommerce:has(> .woocommerce-MyAccount-navigation),
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account .woocommerce.wpbb-v109-account-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:767.98px){
+  html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide--hero,
+  html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content{min-height:520px!important}
+  html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content{margin-left:18px!important;margin-right:18px!important;padding:38px 0 72px!important}
+  html body.wpbb-v143.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media{width:100%!important}
+  html body.wpbb-v143.home #wp-theme-main .tech-spec-strip{margin-left:18px!important;margin-right:18px!important}
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy .wp-theme-woo-legacy__body{width:calc(100% - 32px)!important}
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--account #customer_login{grid-template-columns:1fr!important}
+}
+@media(max-width:575.98px){
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.related.products,.upsells.products) ul.products{grid-template-columns:1fr!important}
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.wpbb-complete-product__media,.wpbb-complete-product__summary,.summary.entry-summary),
+  html body.wpbb-v143 #wp-theme-main.wp-theme-woo-legacy--product :is(.woocommerce-tabs,.related.products,.upsells.products){padding:16px!important}
+}

@@ -1,0 +1,321 @@
+/* Tech Shop 3.8.11.40 - navigation, basket, account and article CTA finish. */
+:root{
+  --wpbb-v139-ink:#111827;
+  --wpbb-v139-navy:#0f2345;
+  --wpbb-v139-copy:#374151;
+  --wpbb-v139-line:#dfe5eb;
+  --wpbb-v139-soft:#f8fafb;
+  --wpbb-v139-accent:var(--sector-primary,#1d63ed);
+  --wpbb-v139-shadow:0 12px 34px rgba(15,35,69,.055);
+  --wpbb-v139-mega-top:104px;
+}
+
+/* --------------------------------------------------------------------------
+ * Desktop mega menu: sit directly under the owning trigger and keep the light
+ * panel's descriptive copy dark enough to read. v118 still owns menu state.
+ * -------------------------------------------------------------------------- */
+@media(min-width:992px){
+  html body.wpbb-v139 .wp-theme-primary-menu>li>.wp-theme-mega-menu{
+    top:var(--wpbb-v139-mega-top)!important;
+    margin-top:0!important;
+  }
+  html body.wpbb-v139 .wp-theme-primary-menu>li>.wp-theme-mega-menu::before{
+    content:""!important;
+    position:absolute!important;
+    left:0!important;
+    right:0!important;
+    top:-8px!important;
+    height:10px!important;
+    display:block!important;
+    background:transparent!important;
+    pointer-events:auto!important;
+  }
+}
+
+/* The current mega panels use light surfaces. Old premium colour rules can
+ * leave their descriptive copy too pale, including the Solutions sentence. */
+html:not(.is-dark-theme):not([data-theme="dark"]) body.wpbb-v139 .wp-theme-mega-menu :is(p,.wp-theme-mega-intro,.wp-theme-mega-description,.wp-theme-mega-link-card p,.wp-theme-mega-link-card small){
+  color:var(--wpbb-v139-ink)!important;
+  opacity:1!important;
+}
+html:not(.is-dark-theme):not([data-theme="dark"]) body.wpbb-v139 .wp-theme-mega-menu :is(h2,h3,h4,h5,h6,.wp-theme-mega-link-card__title){
+  color:var(--wpbb-v139-navy)!important;
+  opacity:1!important;
+}
+html:not(.is-dark-theme):not([data-theme="dark"]) body.wpbb-v139 .wp-theme-mega-menu .wp-theme-mega-link-card > a{
+  color:var(--wpbb-v139-navy)!important;
+}
+
+/* --------------------------------------------------------------------------
+ * Basket: one deterministic two-column desktop owner.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .wp-theme-woo-legacy__body{
+  box-sizing:border-box!important;
+  width:min(calc(100% - 40px),1320px)!important;
+  max-width:1320px!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart :is(.woocommerce,.wpbb-v139-cart-grid){
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:20px!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  align-items:start!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart :is(.woocommerce,.wpbb-v139-cart-grid) > *{
+  min-width:0!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart :is(.woocommerce,.wpbb-v139-cart-grid) > :is(.woocommerce-notices-wrapper,.woocommerce-message,.woocommerce-info,.woocommerce-error){
+  grid-column:1/-1!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce-cart-form{
+  box-sizing:border-box!important;
+  float:none!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:14px!important;
+  border:1px solid var(--wpbb-v139-line)!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  box-shadow:var(--wpbb-v139-shadow)!important;
+  overflow-x:auto!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .cart-collaterals{
+  box-sizing:border-box!important;
+  float:none!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .cart-collaterals .cart_totals{
+  box-sizing:border-box!important;
+  float:none!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:18px!important;
+  border:1px solid var(--wpbb-v139-line)!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  box-shadow:var(--wpbb-v139-shadow)!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .cart_totals h2{
+  margin:0 0 12px!important;
+  color:var(--wpbb-v139-navy)!important;
+  font-size:clamp(22px,1.65vw,28px)!important;
+}
+
+/* Fixed column geometry removes the oversized empty area before each product
+ * name that table-layout:auto was creating on wide screens. */
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart{
+  width:100%!important;
+  max-width:none!important;
+  table-layout:fixed!important;
+  border-collapse:collapse!important;
+  border-spacing:0!important;
+  margin:0!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart :is(th,td){
+  box-sizing:border-box!important;
+  padding:10px 8px!important;
+  vertical-align:middle!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart thead th{
+  padding-top:8px!important;
+  padding-bottom:10px!important;
+  color:var(--wpbb-v139-ink)!important;
+  font-weight:750!important;
+  border-bottom:1px solid var(--wpbb-v139-line)!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart tbody tr.cart_item td{
+  border-bottom:1px solid #edf1f4!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-remove{
+  width:30px!important;
+  min-width:30px!important;
+  max-width:30px!important;
+  padding-inline:2px!important;
+  text-align:center!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-remove a{
+  display:inline-grid!important;
+  place-items:center!important;
+  width:26px!important;
+  height:26px!important;
+  margin:0 auto!important;
+  border-radius:50%!important;
+  color:var(--wpbb-v139-accent)!important;
+  line-height:1!important;
+  text-decoration:none!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-thumbnail{
+  width:68px!important;
+  min-width:68px!important;
+  max-width:68px!important;
+  padding-inline:4px 8px!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-thumbnail img{
+  display:block!important;
+  width:54px!important;
+  height:54px!important;
+  max-width:54px!important;
+  margin:0!important;
+  object-fit:cover!important;
+  border:1px solid var(--wpbb-v139-line)!important;
+  border-radius:9px!important;
+  background:var(--wpbb-v139-soft)!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-name{
+  width:auto!important;
+  min-width:0!important;
+  padding-left:6px!important;
+  padding-right:10px!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-name a{
+  display:inline!important;
+  color:var(--wpbb-v139-accent)!important;
+  overflow-wrap:anywhere!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-price,
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-subtotal{
+  width:92px!important;
+  min-width:92px!important;
+  white-space:nowrap!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-quantity{
+  width:86px!important;
+  min-width:86px!important;
+  white-space:nowrap!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .quantity .qty{
+  box-sizing:border-box!important;
+  width:62px!important;
+  min-width:62px!important;
+  min-height:38px!important;
+  margin:0!important;
+  padding:7px 8px!important;
+  text-align:center!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions{
+  padding:14px 0 0!important;
+  border-bottom:0!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions .coupon{
+  display:inline-grid!important;
+  grid-template-columns:minmax(138px,180px) auto!important;
+  gap:8px!important;
+  align-items:center!important;
+  float:left!important;
+  width:auto!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions .coupon .input-text{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions > .button{
+  float:right!important;
+  margin:0!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .cart_totals table{
+  width:100%!important;
+  margin:0 0 12px!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .cart_totals table :is(th,td){
+  padding:10px!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .wc-proceed-to-checkout{
+  margin:14px 0 0!important;
+  padding:0!important;
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .wc-proceed-to-checkout .checkout-button{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-height:46px!important;
+  margin:0!important;
+  padding:10px 14px!important;
+}
+
+@media(min-width:980px){
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart :is(.woocommerce,.wpbb-v139-cart-grid){
+    grid-template-columns:minmax(0,1.62fr) minmax(310px,.72fr)!important;
+    gap:24px!important;
+  }
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart :is(.woocommerce,.wpbb-v139-cart-grid) > .woocommerce-cart-form{
+    grid-column:1!important;
+  }
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart :is(.woocommerce,.wpbb-v139-cart-grid) > .cart-collaterals{
+    grid-column:2!important;
+    align-self:start!important;
+  }
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart :is(.woocommerce,.wpbb-v139-cart-grid) > :not(.woocommerce-cart-form):not(.cart-collaterals){
+    grid-column:1/-1!important;
+  }
+}
+
+@media(max-width:760px){
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce-cart-form{padding:12px!important}
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart{table-layout:auto!important}
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-thumbnail{display:none!important}
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-price{display:none!important}
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-remove{width:30px!important;min-width:30px!important}
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions .coupon{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    float:none!important;
+    width:100%!important;
+  }
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions > .button{
+    float:none!important;
+    width:100%!important;
+    margin-top:8px!important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * My Account: endpoint content remains a stable navigation/content split.
+ * Routing itself is repaired in v139 PHP/JS.
+ * -------------------------------------------------------------------------- */
+@media(min-width:820px){
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--account .woocommerce:has(.woocommerce-MyAccount-navigation),
+  html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--account .woocommerce.wpbb-v109-account-grid{
+    display:grid!important;
+    grid-template-columns:minmax(210px,250px) minmax(0,1fr)!important;
+    gap:24px!important;
+    align-items:start!important;
+  }
+}
+html body.wpbb-v139 #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation a{
+  color:var(--wpbb-v139-navy)!important;
+  text-decoration:none!important;
+}
+
+/* --------------------------------------------------------------------------
+ * Insight CTA: dark panels keep every link state and nested label white.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v139 #wp-theme-main :is(.wp-theme-article-next-step,.wp-theme-article-cta) a,
+html body.wpbb-v139 #wp-theme-main :is(.wp-theme-article-next-step,.wp-theme-article-cta) a:visited,
+html body.wpbb-v139 #wp-theme-main :is(.wp-theme-article-next-step,.wp-theme-article-cta) a:hover,
+html body.wpbb-v139 #wp-theme-main :is(.wp-theme-article-next-step,.wp-theme-article-cta) a:focus,
+html body.wpbb-v139 #wp-theme-main :is(.wp-theme-article-next-step,.wp-theme-article-cta) a :is(span,strong,small,svg),
+html body.wpbb-v139.single #wp-theme-main :is(.wpbb-cta-section,.wpbb-home-cta) a,
+html body.wpbb-v139.single #wp-theme-main :is(.wpbb-cta-section,.wpbb-home-cta) a:visited,
+html body.wpbb-v139.single #wp-theme-main :is(.wpbb-cta-section,.wpbb-home-cta) a:hover,
+html body.wpbb-v139.single #wp-theme-main :is(.wpbb-cta-section,.wpbb-home-cta) a:focus,
+html body.wpbb-v139.single #wp-theme-main :is(.wpbb-cta-section,.wpbb-home-cta) a :is(span,strong,small,svg){
+  color:#fff!important;
+  fill:currentColor!important;
+  opacity:1!important;
+}

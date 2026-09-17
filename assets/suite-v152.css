@@ -1,0 +1,297 @@
+/* Tech Shop 3.8.11.52 - safe Events-parity rail + pager finish. */
+:root{
+  --wpbb-v152-gap:24px;
+  --wpbb-v152-section-y:52px;
+  --wpbb-v152-heading-gap:26px;
+  --wpbb-v152-accent:var(--wpbb-v149-accent,var(--sector-primary,#1478ff));
+}
+
+/* --------------------------------------------------------------------------
+ * Keep v149's measured header rail as the only horizontal owner.
+ * Full-width bands remain full width; their content is padded to the same rail.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v152.home #wp-theme-main :is(
+  .wp-theme-partners-section,
+  .wp-theme-section-shell,
+  .wpbb-v67-section-shell,
+  .wp-theme-home-stats,
+  .wpbb-sector-proof-band,
+  .wp-theme-insights-section,
+  .wp-theme-blog-preview-section
+):not(.wp-theme-sector-hero):not(.wp-theme-hero){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:var(--wpbb-v149-left)!important;
+  padding-right:var(--wpbb-v149-right)!important;
+}
+html body.wpbb-v152.home #wp-theme-main :is(
+  .wp-theme-partners-section,
+  .wp-theme-section-shell,
+  .wpbb-v67-section-shell,
+  .wp-theme-home-stats,
+  .wpbb-sector-proof-band,
+  .wp-theme-insights-section,
+  .wp-theme-blog-preview-section
+):not(.wp-theme-sector-hero):not(.wp-theme-hero) > :is(
+  .container,.container-fluid,.wpbb-v67-section-inner,.wp-block-group__inner-container,.wp-theme-blog-preview-container
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* Nested shells must never add a second horizontal gutter. */
+html body.wpbb-v152.home #wp-theme-main :is(.wp-theme-section-shell,.wpbb-v67-section-shell):not(.wp-theme-sector-hero)
+  :is(.wp-theme-section-shell,.wpbb-v67-section-shell):not(.wp-theme-sector-hero){
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html body.wpbb-v152.home #wp-theme-main :is(.row,.wpbb-row).wp-theme-section-heading{
+  --bs-gutter-x:0!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html body.wpbb-v152.home #wp-theme-main :is(.row,.wpbb-row).wp-theme-section-heading > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  min-width:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* --------------------------------------------------------------------------
+ * Hero: v149/v118 geometry is retained. The hero is full width; only its copy
+ * starts on the measured header edge. No contained-card width is introduced.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v152.home #wp-theme-main .wp-theme-sector-hero{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wp-theme-sector-hero > :is(.container,.container-fluid),
+html body.wpbb-v152.home #wp-theme-main .wp-theme-sector-hero :is(.row,.wpbb-row){
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wp-theme-sector-hero :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  float:none!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wpbb-swiper--hero,
+html body.wpbb-v152.home #wp-theme-main .wpbb-swiper--hero > .swiper{
+  box-sizing:border-box!important;
+  position:relative!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content{
+  box-sizing:border-box!important;
+  width:calc(100% - var(--wpbb-v149-left) - var(--wpbb-v149-right))!important;
+  max-width:none!important;
+  margin-left:var(--wpbb-v149-left)!important;
+  margin-right:var(--wpbb-v149-right)!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* One pager only. Native/legacy pagers stay hidden while v152 owns the dots. */
+html body.wpbb-v152.home #wp-theme-main .wpbb-swiper--hero.wpbb-v152-has-pagination :is(
+  .swiper-pagination,.wpbb-v120-pagination,.wpbb-v121-pagination,.wpbb-v123-hero-pagination,
+  .wpbb-v124-hero-pagination,.wpbb-v126-hero-pagination,.wpbb-v127-hero-pagination,
+  .wpbb-v128-hero-pagination,.wpbb-v135-hero-pagination,.wpbb-v149-hero-pagination
+):not(.wpbb-v152-hero-pagination){display:none!important}
+html body.wpbb-v152.home #wp-theme-main .wpbb-swiper--hero .wpbb-v152-hero-pagination{
+  box-sizing:border-box!important;
+  position:absolute!important;
+  left:50%!important;
+  bottom:18px!important;
+  z-index:70!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  width:max-content!important;
+  max-width:calc(100% - 32px)!important;
+  margin:0!important;
+  padding:7px 9px!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.92)!important;
+  box-shadow:0 8px 24px rgba(15,23,42,.16)!important;
+  transform:translateX(-50%)!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  backdrop-filter:blur(7px)!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wpbb-v152-hero-pagination__bullet{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  display:block!important;
+  flex:0 0 auto!important;
+  width:8px!important;
+  height:8px!important;
+  min-width:8px!important;
+  min-height:8px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--wpbb-v152-accent) 34%,#fff)!important;
+  opacity:1!important;
+  cursor:pointer!important;
+  transition:width .18s ease,background-color .18s ease!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wpbb-v152-hero-pagination__bullet.is-active{
+  width:24px!important;
+  background:var(--wpbb-v152-accent)!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wpbb-v152-hero-pagination__bullet:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--wpbb-v152-accent) 34%,transparent)!important;
+  outline-offset:3px!important;
+}
+
+/* --------------------------------------------------------------------------
+ * Trust/spec strip: its .container wrapper owns the measured rail exactly once.
+ * This is deliberately the v50 model, not the v51 zero-padding regression.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v152.home #wp-theme-main .wpbb-v150-trust-shell{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding-left:var(--wpbb-v149-left)!important;
+  padding-right:var(--wpbb-v149-right)!important;
+  padding-bottom:18px!important;
+}
+html body.wpbb-v152.home #wp-theme-main .wpbb-v150-trust-shell > .tech-spec-strip,
+html body.wpbb-v152.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid{
+  --bs-gutter-x:0!important;
+  --bs-gutter-y:0!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:18px 0 0!important;
+  padding:0!important;
+  align-items:stretch!important;
+}
+html body.wpbb-v152.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  float:none!important;
+  display:block!important;
+  flex:none!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+/* Requested breathing room between the trust separator and Shop by category. */
+html body.wpbb-v152.home #wp-theme-main .wpbb-v150-trust-shell + .tech-category-section{
+  padding-top:48px!important;
+}
+html body.wpbb-v152.home #wp-theme-main .tech-category-section .wp-theme-sector-eyebrow{
+  margin-top:0!important;
+  margin-bottom:10px!important;
+}
+html body.wpbb-v152.home #wp-theme-main .tech-category-section .wp-theme-section-heading{
+  margin-top:0!important;
+  margin-bottom:32px!important;
+}
+
+/* Harmonise section rhythm without changing the working card/grid ownership. */
+html body.wpbb-v152.home #wp-theme-main :is(
+  .tech-category-section,.wp-theme-services-section,.wp-theme-about-section,
+  .wp-theme-industries-section,.wp-theme-cases-section,.wp-theme-gallery-section,
+  .wp-theme-shop-section,.wp-theme-process-section,.wp-theme-faq-section,
+  .wp-theme-insights-section
+){
+  padding-top:var(--wpbb-v152-section-y)!important;
+  padding-bottom:var(--wpbb-v152-section-y)!important;
+}
+html body.wpbb-v152.home #wp-theme-main :is(.wp-theme-section-heading,.wp-theme-blog-section-heading){
+  margin-top:0!important;
+  margin-bottom:var(--wpbb-v152-heading-gap)!important;
+}
+html body.wpbb-v152.home #wp-theme-main :is(
+  .tech-category-grid,.wp-theme-sector-services,.wp-theme-sector-industries,
+  .wp-theme-sector-proof,.wp-theme-case-grid,.wp-theme-sector-process-grid,
+  .wpbb-v150-gallery-grid
+){
+  column-gap:var(--wpbb-v152-gap)!important;
+  row-gap:var(--wpbb-v152-gap)!important;
+}
+
+/* Footer/newsletter content follows the same measured header rail. */
+html body.wpbb-v152 .wp-theme-footer-newsletter > .container,
+html body.wpbb-v152 .wp-theme-site-footer > .container,
+html body.wpbb-v152 .wp-theme-footer-main > .container{
+  box-sizing:border-box!important;
+  width:calc(100% - var(--wpbb-v149-left) - var(--wpbb-v149-right))!important;
+  max-width:none!important;
+  margin-left:var(--wpbb-v149-left)!important;
+  margin-right:var(--wpbb-v149-right)!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+@media(max-width:1039.98px){
+  html body.wpbb-v152.home #wp-theme-main .wpbb-v150-trust-shell > .tech-spec-strip,
+  html body.wpbb-v152.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:991.98px){
+  :root{--wpbb-v152-gap:20px;--wpbb-v152-section-y:44px;--wpbb-v152-heading-gap:24px}
+}
+@media(max-width:767.98px){
+  :root{--wpbb-v152-gap:18px;--wpbb-v152-section-y:38px;--wpbb-v152-heading-gap:22px}
+  html body.wpbb-v152.home #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content{
+    width:calc(100% - 32px)!important;
+    margin-left:16px!important;
+    margin-right:16px!important;
+  }
+  html body.wpbb-v152.home #wp-theme-main .wpbb-swiper--hero .wpbb-v152-hero-pagination{
+    bottom:10px!important;
+    padding:6px 8px!important;
+  }
+  html body.wpbb-v152.home #wp-theme-main .wpbb-v150-trust-shell{
+    padding-left:16px!important;
+    padding-right:16px!important;
+    padding-bottom:14px!important;
+  }
+  html body.wpbb-v152.home #wp-theme-main .wpbb-v150-trust-shell > .tech-spec-strip,
+  html body.wpbb-v152.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+  }
+  html body.wpbb-v152.home #wp-theme-main .wpbb-v150-trust-shell + .tech-category-section{padding-top:40px!important}
+  html body.wpbb-v152.home #wp-theme-main .tech-category-section .wp-theme-section-heading{margin-bottom:26px!important}
+}

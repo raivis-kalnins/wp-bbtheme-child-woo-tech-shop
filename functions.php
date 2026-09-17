@@ -1076,3 +1076,103 @@ require_once get_stylesheet_directory() . '/inc/v105-finish.php';
 
 // v3.8.11.07 final search, WooCommerce, Jobs captcha/grid and responsive repair.
 require_once get_stylesheet_directory() . '/inc/v107-finish.php';
+
+// v3.8.11.08 WooCommerce layout/polish and packaging finish.
+require_once get_stylesheet_directory() . '/inc/v108-finish.php';
+
+// v3.8.11.09 WooCommerce, media and account finalisation.
+require_once get_stylesheet_directory() . '/inc/v109-finish.php';
+
+// v3.8.11.10 media, WooCommerce, managed-page and route-facing finish.
+require_once get_stylesheet_directory() . '/inc/v110-finish.php';
+
+// v3.8.11.11 hero finder, editorial grid, mega-menu and image-quality finish.
+require_once get_stylesheet_directory() . '/inc/v111-finish.php';
+
+// v3.8.11.12 editorial grid, hero clarity and media recovery.
+require_once get_stylesheet_directory() . '/inc/v112-finish.php';
+
+// v3.8.11.13 final hero edge/clarity and editorial-grid alignment.
+require_once get_stylesheet_directory() . '/inc/v113-finish.php';
+
+// v3.8.11.14 child-only settings, editor, legal, editorial and hero finish.
+require_once get_stylesheet_directory() . '/inc/v114-finish.php';
+
+// v3.8.11.15 final mega-menu, hero/media, quote and BBuilder repair.
+require_once get_stylesheet_directory() . '/inc/v115-finish.php';
+
+// v3.8.11.16 reset-safe layout/media, mega-menu, consent and BBuilder finish.
+require_once get_stylesheet_directory() . '/inc/v116-finish.php';
+
+// v3.8.11.17 exact mega-menu placement, reset-safe BBuilder grid and immediate media recovery.
+require_once get_stylesheet_directory() . '/inc/v117-finish.php';
+
+
+// v3.8.11.18 reset-safe gutters, direct hero assets, nav-trigger mega positioning and cache finish.
+require_once get_stylesheet_directory() . '/inc/v118-finish.php';
+
+// v3.8.11.19 live regression repair: closer mega menus, canonical gutters/grids and no-flash consent.
+require_once get_stylesheet_directory() . '/inc/v119-finish.php';
+
+// v3.8.11.20 stable v119 rollback, restored gutters/grids and deterministic hero pagination/quality repair.
+require_once get_stylesheet_directory() . '/inc/v120-finish.php';
+
+// v3.8.11.21 scoped BBuilder grid recovery; retire v119/v120 global geometry while preserving hero quality/pagination.
+require_once get_stylesheet_directory() . '/inc/v121-finish.php';
+
+// v3.8.11.22 component-only grid-gap finish; keep v121 alignment and restore stable card/media/stat spacing.
+require_once get_stylesheet_directory() . '/inc/v122-finish.php';
+
+// v3.8.11.23 remaining basic grids/gaps + authoritative hero source/pagination finish.
+require_once get_stylesheet_directory() . '/inc/v123-finish.php';
+
+// v3.8.11.24 final basic visual hardening: deterministic card gaps, full-width fun-facts and one compact hero pager.
+require_once get_stylesheet_directory() . '/inc/v124-finish.php';
+
+// v3.8.11.25 final scoped grid, hero clarity and WooCommerce shop/cart/account finish.
+require_once get_stylesheet_directory() . '/inc/v125-final.php';
+
+// v3.8.11.26 final cross-theme component grids, hero image/pagination and process-card recovery.
+require_once get_stylesheet_directory() . '/inc/v126-final.php';
+
+// v3.8.11.27 final live-regression hardening: robust card grids, process-card shape, hero pagination and Business/Building hero fade.
+require_once get_stylesheet_directory() . '/inc/v127-final.php';
+
+// v3.8.11.28 final live component recovery: commerce grids, cart/checkout, process cards and stable hero media/pagination.
+require_once get_stylesheet_directory() . '/inc/v128-final.php';
+
+// v3.8.11.34 final cross-theme hero, grid, process and WooCommerce ownership layer.
+require_once get_stylesheet_directory() . '/inc/v134-final.php';
+
+
+// v3.8.11.35 final duplicate/process/hero cleanup.
+require_once get_stylesheet_directory() . '/inc/v135-final.php';
+
+// v3.8.11.36 full-width hero, stable process and cross-theme grid ownership.
+require_once get_stylesheet_directory() . '/inc/v136-final.php';
+
+// v3.8.11.40 Automotive-reference scoped recovery for Tech Shop.
+require_once get_stylesheet_directory() . '/inc/v137-final.php';
+require_once get_stylesheet_directory() . '/inc/v138-final.php';
+require_once get_stylesheet_directory() . '/inc/v139-final.php';
+require_once get_stylesheet_directory() . '/inc/v140-commerce.php';
+
+// v3.8.11.42 Automotive-parity grid + hero alignment recovery.
+require_once get_stylesheet_directory() . '/inc/v142-final.php';
+
+// v3.8.11.43 screenshot-led homepage + WooCommerce correction pass.
+require_once get_stylesheet_directory() . '/inc/v143-final.php';
+// v3.8.11.44 DB-informed deterministic homepage catalogue + Woo stability pass.
+require_once get_stylesheet_directory() . '/inc/v144-final.php';
+
+// v3.8.11.48 clean deterministic homepage rail/grid owner.
+require_once get_stylesheet_directory() . '/inc/v148-final.php';
+
+// v3.8.11.49 Events-reference measured rail/grid owner.
+require_once get_stylesheet_directory() . '/inc/v149-events-parity.php';
+
+// v3.8.11.50 targeted trust/gallery/process stability on top of Events parity.
+require_once get_stylesheet_directory() . '/inc/v150-section-stability.php';
+
+// v3.8.11.52 safe finish: preserve v50 Events-parity geometry, repair trust rail and add hero pagination without changing hero width.
+require_once get_stylesheet_directory() . '/inc/v152-finish.php';

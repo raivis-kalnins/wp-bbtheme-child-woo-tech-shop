@@ -1,0 +1,207 @@
+/* Tech Shop 3.8.11.40 - scoped layout owner. */
+:root{
+  --wpbb-v137-left:max(28px,calc((100vw - 1440px)/2));
+  --wpbb-v137-right:max(28px,calc((100vw - 1440px)/2));
+  --wpbb-v137-gap:24px;
+}
+html,body{max-width:100%;overflow-x:clip}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-hidden{display:none!important}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-archive-duplicate-title{display:none!important}
+
+/* Match normal page sections to the measured header/footer content edge. */
+html body.wpbb-v137 #wp-theme-main :is(
+  .wp-theme-section-shell,
+  .wpbb-v67-section-shell,
+  .wp-theme-home-stats,
+  .wpbb-sector-proof-band,
+  .wp-theme-inner-hero,
+  .wp-theme-insights-section,
+  .wp-theme-blog-preview-section
+):not(.wp-theme-sector-hero):not(.wp-theme-hero){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:var(--wpbb-v137-left)!important;
+  padding-right:var(--wpbb-v137-right)!important;
+}
+
+/* Never double-pad a historical shell nested inside another shell. */
+html body.wpbb-v137 #wp-theme-main :is(.wp-theme-section-shell,.wpbb-v67-section-shell):not(.wp-theme-sector-hero)
+  :is(.wp-theme-section-shell,.wpbb-v67-section-shell):not(.wp-theme-sector-hero){
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* Remove the second width cap, but only on direct section containers. */
+html body.wpbb-v137 #wp-theme-main :is(
+  .wp-theme-section-shell,
+  .wpbb-v67-section-shell,
+  .wp-theme-home-stats,
+  .wpbb-sector-proof-band,
+  .wp-theme-inner-hero,
+  .wp-theme-insights-section,
+  .wp-theme-blog-preview-section
+):not(.wp-theme-sector-hero):not(.wp-theme-hero) > :is(
+  .container,
+  .container-fluid,
+  .wpbb-v67-section-inner,
+  .wp-block-group__inner-container,
+  .wp-theme-blog-preview-container
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* The finder and commerce sections must never clip their second row. */
+html body.wpbb-v137 #wp-theme-main :is(
+  .wpbb-sector-finder,
+  .wp-theme-home-product-catalogue,
+  .wp-theme-products-section,
+  .wp-theme-services-section,
+  .wp-theme-industries-section
+){max-height:none!important;overflow:visible!important}
+
+/* Scoped grid owner. Generic Bootstrap/media/form rows are deliberately excluded. */
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid{
+  --bs-gutter-x:0!important;
+  --bs-gutter-y:0!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  align-items:stretch!important;
+  list-style:none!important;
+}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid > .wpbb-v137-grid-cell{
+  box-sizing:border-box!important;
+  display:flex!important;
+  float:none!important;
+  flex:none!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  align-items:stretch!important;
+}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid > .wpbb-v137-grid-cell > :is(
+  .wpbb-icon-card,
+  .wp-theme-sector-card,
+  .wp-theme-case-card,
+  .wp-theme-process-card,
+  .wpbb-sector-card,
+  .wpbb-catalogue-card,
+  article,
+  .card
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  margin:0!important;
+}
+
+/* Sector proof cards. */
+html body.wpbb-v137 #wp-theme-main :is(.wpbb-v137-sector-proof-card,.wpbb-sector-proof-card){
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:176px!important;
+}
+
+/* Stats stay compact while sharing equal widths. */
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-stats-grid :is(.wpbb-fun-fact,.wp-theme-sector-proof__item){
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:108px!important;
+  margin:0!important;
+}
+
+/* Vehicle result cards. */
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-finder-grid .wpbb-sector-card{
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-finder-grid .wpbb-sector-card__media,
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-finder-grid .wpbb-sector-card__media img{
+  width:100%!important;
+}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-finder-grid .wpbb-sector-card__media img{
+  display:block!important;
+  aspect-ratio:16/10!important;
+  object-fit:cover!important;
+}
+
+/* Homepage parts catalogue: deterministic 4/2/1 layout without moving cards in the DOM. */
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-product-card{
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  overflow:hidden!important;
+}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-product-card img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:4/3!important;
+  object-fit:cover!important;
+}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-product-card :is(h1,h2,h3,h4,h5,h6,p,a,span,strong,small){
+  writing-mode:horizontal-tb!important;
+  word-break:normal!important;
+  overflow-wrap:anywhere!important;
+}
+
+/* Keep editorial cards on the same edge as their heading. */
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-blog-grid{margin-top:0!important}
+html body.wpbb-v137 #wp-theme-main .wpbb-v137-blog-grid > .wpbb-v137-grid-cell{height:100%!important}
+
+/* First content section follows the page hero without excess top spacing. */
+html body.wpbb-v137 #wp-theme-main .wp-theme-inner-hero + .wp-theme-section-shell{
+  padding-top:42px!important;
+}
+
+@media(min-width:680px){
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid.wpbb-v137-cols-2,
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid.wpbb-v137-cols-3,
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid.wpbb-v137-cols-4{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:22px!important;
+  }
+}
+@media(min-width:1040px){
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid.wpbb-v137-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid.wpbb-v137-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid.wpbb-v137-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-product-grid{gap:24px!important}
+}
+@media(max-width:1199.98px){
+  :root{--wpbb-v137-left:24px;--wpbb-v137-right:24px;--wpbb-v137-gap:22px}
+}
+@media(max-width:679.98px){
+  :root{--wpbb-v137-left:18px;--wpbb-v137-right:18px;--wpbb-v137-gap:18px}
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-grid{gap:18px!important}
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-stats-grid.wpbb-v137-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:479.98px){
+  :root{--wpbb-v137-left:16px;--wpbb-v137-right:16px}
+  html body.wpbb-v137 #wp-theme-main .wpbb-v137-stats-grid.wpbb-v137-grid{grid-template-columns:1fr!important}
+}

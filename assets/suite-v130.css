@@ -1,0 +1,461 @@
+/* v3.8.11.30 Tech Shop commerce/account finishing pass.
+ * Scope: Cart desktop columns, checkout marketing-consent cleanup and
+ * canonical My Account presentation/endpoints. No homepage grid changes.
+ */
+
+:root {
+  --wpbb-v130-line: #e1e6eb;
+  --wpbb-v130-ink: #0f2345;
+  --wpbb-v130-copy: #5e6878;
+  --wpbb-v130-soft: #f8fafb;
+  --wpbb-v130-accent: var(--sector-primary, #1d63ed);
+  --wpbb-v130-shadow: 0 12px 34px rgba(15, 35, 69, .055);
+}
+
+/* -------------------------------------------------------------------------
+   CART: true two-column desktop shell, compact product table and totals.
+   ------------------------------------------------------------------------- */
+html body #wp-theme-main.wp-theme-woo-legacy--cart .wp-theme-woo-legacy__body > .woocommerce,
+html body.woocommerce-cart #wp-theme-main .wp-theme-woo-legacy__body > .woocommerce,
+html body.wpbb-v130-theme-tech #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce.wpbb-v130-cart-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 24px !important;
+  align-items: start !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce > :is(.woocommerce-notices-wrapper,.woocommerce-message,.woocommerce-info,.woocommerce-error),
+html body.woocommerce-cart #wp-theme-main .woocommerce > :is(.woocommerce-notices-wrapper,.woocommerce-message,.woocommerce-info,.woocommerce-error) {
+  grid-column: 1 / -1 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce-cart-form,
+html body.woocommerce-cart #wp-theme-main .woocommerce-cart-form {
+  box-sizing: border-box !important;
+  grid-column: 1 !important;
+  float: none !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 20px !important;
+  border: 1px solid var(--wpbb-v130-line) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: var(--wpbb-v130-shadow) !important;
+  overflow-x: auto !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .cart-collaterals,
+html body.woocommerce-cart #wp-theme-main .cart-collaterals {
+  box-sizing: border-box !important;
+  grid-column: 1 !important;
+  float: none !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .cart-collaterals .cart_totals,
+html body.woocommerce-cart #wp-theme-main .cart-collaterals .cart_totals {
+  box-sizing: border-box !important;
+  float: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 22px !important;
+  border: 1px solid var(--wpbb-v130-line) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: var(--wpbb-v130-shadow) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart {
+  width: 100% !important;
+  table-layout: auto !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart :is(th,td),
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart :is(th,td) {
+  box-sizing: border-box !important;
+  padding: 14px 12px !important;
+  vertical-align: middle !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-remove,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-remove {
+  width: 38px !important;
+  min-width: 38px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  text-align: center !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-remove a,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-remove a {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 auto !important;
+  border-radius: 50% !important;
+  color: var(--wpbb-v130-accent) !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-thumbnail,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-thumbnail {
+  width: 82px !important;
+  min-width: 82px !important;
+  padding-left: 6px !important;
+  padding-right: 10px !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-thumbnail img,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-thumbnail img {
+  display: block !important;
+  width: 64px !important;
+  height: 64px !important;
+  max-width: 64px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  object-fit: cover !important;
+  border: 1px solid var(--wpbb-v130-line) !important;
+  border-radius: 10px !important;
+  background: var(--wpbb-v130-soft) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-name,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-name {
+  min-width: 180px !important;
+  padding-left: 8px !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-price,
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-subtotal,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-price,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-subtotal {
+  width: 116px !important;
+  white-space: nowrap !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-quantity,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-quantity {
+  width: 110px !important;
+  white-space: nowrap !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .quantity .qty,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart .quantity .qty {
+  width: 72px !important;
+  min-width: 72px !important;
+  min-height: 42px !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart td.actions {
+  padding-top: 18px !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions .coupon,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart td.actions .coupon {
+  display: inline-grid !important;
+  grid-template-columns: minmax(150px, 190px) auto !important;
+  gap: 10px !important;
+  align-items: center !important;
+  float: left !important;
+  width: auto !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions .coupon .input-text,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart td.actions .coupon .input-text {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions > .button,
+html body.woocommerce-cart #wp-theme-main table.shop_table.cart td.actions > .button {
+  float: right !important;
+  margin: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .cart_totals h2,
+html body.woocommerce-cart #wp-theme-main .cart_totals h2 {
+  margin: 0 0 14px !important;
+  color: var(--wpbb-v130-ink) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .cart_totals table,
+html body.woocommerce-cart #wp-theme-main .cart_totals table {
+  width: 100% !important;
+  margin: 0 0 16px !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .wc-proceed-to-checkout,
+html body.woocommerce-cart #wp-theme-main .wc-proceed-to-checkout {
+  margin: 18px 0 0 !important;
+  padding: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--cart .wc-proceed-to-checkout .checkout-button,
+html body.woocommerce-cart #wp-theme-main .wc-proceed-to-checkout .checkout-button {
+  display: flex !important;
+  width: 100% !important;
+  min-height: 50px !important;
+  margin: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+@media (min-width: 1024px) {
+  html body #wp-theme-main.wp-theme-woo-legacy--cart .wp-theme-woo-legacy__body > .woocommerce,
+  html body.woocommerce-cart #wp-theme-main .wp-theme-woo-legacy__body > .woocommerce,
+  html body.wpbb-v130-theme-tech #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce.wpbb-v130-cart-layout {
+    grid-template-columns: minmax(0, 1.72fr) minmax(320px, .72fr) !important;
+    gap: 28px !important;
+  }
+  html body #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce-cart-form,
+  html body.woocommerce-cart #wp-theme-main .woocommerce-cart-form {
+    grid-column: 1 !important;
+  }
+  html body #wp-theme-main.wp-theme-woo-legacy--cart .cart-collaterals,
+  html body.woocommerce-cart #wp-theme-main .cart-collaterals {
+    grid-column: 2 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  html body #wp-theme-main.wp-theme-woo-legacy--cart .woocommerce-cart-form,
+  html body.woocommerce-cart #wp-theme-main .woocommerce-cart-form {
+    padding: 14px !important;
+  }
+  html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart .product-thumbnail,
+  html body.woocommerce-cart #wp-theme-main table.shop_table.cart .product-thumbnail {
+    display: none !important;
+  }
+  html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions .coupon,
+  html body.woocommerce-cart #wp-theme-main table.shop_table.cart td.actions .coupon {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    float: none !important;
+    width: 100% !important;
+  }
+  html body #wp-theme-main.wp-theme-woo-legacy--cart table.shop_table.cart td.actions > .button,
+  html body.woocommerce-cart #wp-theme-main table.shop_table.cart td.actions > .button {
+    float: none !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   CHECKOUT: remove the accidental marketing/newsletter opt-in injected into
+   the order panel. The footer newsletter remains untouched.
+   ------------------------------------------------------------------------- */
+html body #wp-theme-main.wp-theme-woo-legacy--checkout form.checkout .wpbb-v128-newsletter-consent,
+html body #wp-theme-main.wp-theme-woo-legacy--checkout form.checkout .wp-newslatter-campaigns-consent,
+html body #wp-theme-main.wp-theme-woo-legacy--checkout form.checkout .wp-newsletter-campaigns-consent,
+html body.woocommerce-checkout #wp-theme-main form.checkout .wpbb-v128-newsletter-consent,
+html body.woocommerce-checkout #wp-theme-main form.checkout .wp-newslatter-campaigns-consent,
+html body.woocommerce-checkout #wp-theme-main form.checkout .wp-newsletter-campaigns-consent {
+  display: none !important;
+}
+
+/* Keep privacy/order text separate from the action button. */
+html body #wp-theme-main.wp-theme-woo-legacy--checkout form.checkout #payment .place-order,
+html body.woocommerce-checkout #wp-theme-main form.checkout #payment .place-order {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 14px !important;
+  align-items: start !important;
+  padding: 20px !important;
+}
+html body #wp-theme-main.wp-theme-woo-legacy--checkout form.checkout #place_order,
+html body.woocommerce-checkout #wp-theme-main form.checkout #place_order {
+  justify-self: stretch !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  margin: 0 !important;
+}
+
+/* -------------------------------------------------------------------------
+   MY ACCOUNT: working login/register shell plus stable logged-in endpoints.
+   ------------------------------------------------------------------------- */
+html body #wp-theme-main.wp-theme-woo-legacy--account .wp-theme-woo-legacy__body {
+  width: min(calc(100% - 40px), 1180px) !important;
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account #customer_login,
+html body.woocommerce-account #wp-theme-main #customer_login {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 22px !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account #customer_login > :is(.u-column1,.u-column2,.col-1,.col-2),
+html body.woocommerce-account #wp-theme-main #customer_login > :is(.u-column1,.u-column2,.col-1,.col-2) {
+  box-sizing: border-box !important;
+  float: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 24px !important;
+  border: 1px solid var(--wpbb-v130-line) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: var(--wpbb-v130-shadow) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account #customer_login h2,
+html body.woocommerce-account #wp-theme-main #customer_login h2 {
+  margin: 0 0 18px !important;
+  color: var(--wpbb-v130-ink) !important;
+  font-size: clamp(24px, 2vw, 32px) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account #customer_login form,
+html body.woocommerce-account #wp-theme-main #customer_login form {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account #customer_login :is(input.input-text,input[type="text"],input[type="email"],input[type="password"]),
+html body.woocommerce-account #wp-theme-main #customer_login :is(input.input-text,input[type="text"],input[type="email"],input[type="password"]) {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 10px 12px !important;
+  border: 1px solid var(--wpbb-v130-line) !important;
+  border-radius: 9px !important;
+  background: #fff !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce:has(.woocommerce-MyAccount-navigation),
+html body.woocommerce-account #wp-theme-main .woocommerce:has(.woocommerce-MyAccount-navigation),
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce.wpbb-v109-account-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 22px !important;
+  width: 100% !important;
+  align-items: start !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation,
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-content,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-content {
+  box-sizing: border-box !important;
+  float: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  border: 1px solid var(--wpbb-v130-line) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: var(--wpbb-v130-shadow) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation {
+  padding: 12px !important;
+  background: var(--wpbb-v130-soft) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-content,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-content {
+  padding: 26px !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation ul,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation li,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation li {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--wpbb-v130-line) !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation li:last-child,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation li:last-child {
+  border-bottom: 0 !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation a,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation a {
+  display: flex !important;
+  min-height: 44px !important;
+  align-items: center !important;
+  padding: 8px 11px !important;
+  border-radius: 9px !important;
+  color: var(--wpbb-v130-ink) !important;
+  font-weight: 720 !important;
+  text-decoration: none !important;
+}
+
+html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation .is-active a,
+html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation .is-active a {
+  background: #fff !important;
+  color: var(--wpbb-v130-accent) !important;
+  box-shadow: 0 3px 10px rgba(15, 35, 69, .05) !important;
+}
+
+@media (min-width: 820px) {
+  html body #wp-theme-main.wp-theme-woo-legacy--account #customer_login,
+  html body.woocommerce-account #wp-theme-main #customer_login {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+  html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce:has(.woocommerce-MyAccount-navigation),
+  html body.woocommerce-account #wp-theme-main .woocommerce:has(.woocommerce-MyAccount-navigation),
+  html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce.wpbb-v109-account-grid {
+    grid-template-columns: minmax(210px, 260px) minmax(0, 1fr) !important;
+    gap: 26px !important;
+  }
+}
+
+@media (max-width: 819px) {
+  html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation ul,
+  html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation ul {
+    display: flex !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+  }
+  html body #wp-theme-main.wp-theme-woo-legacy--account .woocommerce-MyAccount-navigation li,
+  html body.woocommerce-account #wp-theme-main .woocommerce-MyAccount-navigation li {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    border: 0 !important;
+  }
+}

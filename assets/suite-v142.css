@@ -1,0 +1,72 @@
+/* Tech Shop 3.8.11.42 - Automotive-parity alignment recovery.
+ * v137 measures the real header edge and marks only known card rows.
+ * This layer owns only Tech-specific strips/cards without changing DOM.
+ */
+:root{
+  --wpbb-v142-accent:var(--sector-primary,var(--sector-v97-accent,#1d63ed));
+  --wpbb-v142-gap:24px;
+}
+html,body{max-width:100%;overflow-x:clip}
+
+/* -------------------------------------------------------------------------
+ * One horizontal edge: follow the measured header/footer edge from v137.
+ * ---------------------------------------------------------------------- */
+html body.wpbb-v142 #wp-theme-main .tech-spec-strip,
+html body.wpbb-v142 #wp-theme-main .wp-theme-partners-section > :is(.container,.container-fluid){
+  box-sizing:border-box!important;
+  width:auto!important;
+  max-width:none!important;
+  margin-left:var(--wpbb-v137-left)!important;
+  margin-right:var(--wpbb-v137-right)!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html body.wpbb-v142 #wp-theme-main .tech-category-section > :is(.container,.container-fluid),
+html body.wpbb-v142 #wp-theme-main .tech-category-section .tech-category-grid{
+  box-sizing:border-box!important;
+  max-width:none!important;
+}
+
+/* All JS-marked grids use the proven Automotive 4/2/1 or 3/2/1 owner. */
+html body.wpbb-v142 #wp-theme-main .wpbb-v137-grid{
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+html body.wpbb-v142 #wp-theme-main .wpbb-v137-grid > .wpbb-v137-grid-cell{
+  min-height:0!important;
+  overflow:visible!important;
+}
+html body.wpbb-v142 #wp-theme-main .wpbb-v142-tech-grid{
+  gap:20px!important;
+}
+html body.wpbb-v142 #wp-theme-main .wpbb-v142-tech-grid .tech-trust-item,
+html body.wpbb-v142 #wp-theme-main .wpbb-v142-tech-grid .tech-category-card{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  margin:0!important;
+}
+
+/* -------------------------------------------------------------------------
+ * Hero
+ * ----------------------------------------------------------------------
+ * Do not redefine hero geometry here. Tech Shop and Automotive share the
+ * proven v97 + v118 hero system; v141 broke that parity by adding a second
+ * shell owner. v142 deliberately leaves v97/v118 in charge while preserving
+ * the new high-resolution hero files.
+ */
+
+/* Catalogue cards: equal rows and predictable media, but no wrapper guessing. */
+html body.wpbb-v142.home #wp-theme-main .wpbb-v137-product-grid{gap:24px!important}
+html body.wpbb-v142.home #wp-theme-main .wpbb-v137-product-card{height:100%!important}
+html body.wpbb-v142.home #wp-theme-main .wpbb-v137-product-card img{aspect-ratio:4/3!important;object-fit:cover!important}
+
+@media(min-width:1040px){
+  html body.wpbb-v142 #wp-theme-main .wpbb-v142-tech-grid.wpbb-v137-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+@media(max-width:479.98px){
+  html body.wpbb-v142 #wp-theme-main .wpbb-v142-tech-grid.wpbb-v137-grid{grid-template-columns:1fr!important}
+}

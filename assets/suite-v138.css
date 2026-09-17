@@ -1,0 +1,161 @@
+/* Tech Shop 3.8.11.40 - hero pager and compact homepage section rhythm. */
+:root{
+  --wpbb-v138-section-y:56px;
+  --wpbb-v138-section-y-adjacent:44px;
+  --wpbb-v138-heading-gap:28px;
+  --wpbb-v138-pager-accent:var(--sector-primary,var(--sector-v97-accent,#1D63ED));
+}
+
+/* --------------------------------------------------------------------------
+ * Hero pagination
+ * --------------------------------------------------------------------------
+ * v97 deliberately hid all hero controls. v137 retained that visual layer, so
+ * the slider continued to work but had no visible position/control affordance.
+ * v138 owns one small accessible pager without reviving the old v120-v124 stack.
+ */
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-swiper--hero,
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-swiper--hero .swiper{
+  position:relative!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-swiper--hero .wpbb-v138-hero-pagination{
+  box-sizing:border-box!important;
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:18px!important;
+  z-index:40!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  width:max-content!important;
+  max-width:calc(100% - 32px)!important;
+  margin:0!important;
+  padding:7px 9px!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.9)!important;
+  box-shadow:0 8px 24px rgba(15,23,42,.14)!important;
+  transform:translateX(-50%)!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  backdrop-filter:blur(7px)!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-swiper--hero .wpbb-v138-hero-pagination__bullet{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  display:block!important;
+  flex:0 0 auto!important;
+  width:8px!important;
+  height:8px!important;
+  min-width:8px!important;
+  min-height:8px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--wpbb-v138-pager-accent) 34%,#fff)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  cursor:pointer!important;
+  transition:width .18s ease,background-color .18s ease,transform .18s ease!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-swiper--hero .wpbb-v138-hero-pagination__bullet:is(.is-active,[aria-current="true"]){
+  width:26px!important;
+  background:var(--wpbb-v138-pager-accent)!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-swiper--hero .wpbb-v138-hero-pagination__bullet:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--wpbb-v138-pager-accent) 34%,transparent)!important;
+  outline-offset:3px!important;
+}
+
+/* --------------------------------------------------------------------------
+ * Homepage vertical rhythm
+ * --------------------------------------------------------------------------
+ * Earlier premium CSS still contributes 68px top and bottom to almost every
+ * shell. Adjacent shells therefore read as oversized blank bands. Keep the
+ * v137 horizontal alignment owner intact and only compact vertical spacing.
+ */
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wp-theme-section-shell:not(.wp-theme-sector-hero):not(.wp-theme-hero),
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-v67-section-shell:not(.wp-theme-sector-hero):not(.wp-theme-hero){
+  padding-top:var(--wpbb-v138-section-y)!important;
+  padding-bottom:var(--wpbb-v138-section-y)!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wp-theme-section-shell:not(.wp-theme-sector-hero):not(.wp-theme-hero) + .wp-theme-section-shell:not(.wp-theme-sector-hero),
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-v67-section-shell:not(.wp-theme-sector-hero):not(.wp-theme-hero) + .wpbb-v67-section-shell:not(.wp-theme-sector-hero){
+  padding-top:var(--wpbb-v138-section-y-adjacent)!important;
+}
+
+/* Stats and proof cards form one visual sequence. */
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wp-theme-home-stats{
+  padding-top:40px!important;
+  padding-bottom:20px!important;
+  margin:0!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wp-theme-home-stats + .wpbb-sector-proof-band,
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-sector-proof-band{
+  padding-top:22px!important;
+  padding-bottom:44px!important;
+  margin-top:0!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-sector-proof-band + .wp-theme-section-shell{
+  padding-top:48px!important;
+}
+
+/* Headings were also carrying historical margins on top of large shell pads. */
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main :is(.wp-theme-section-heading,.wp-theme-blog-section-heading){
+  margin-top:0!important;
+  margin-bottom:var(--wpbb-v138-heading-gap)!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main :is(.wp-theme-section-shell,.wpbb-v67-section-shell) > :is(.container,.container-fluid,.wpbb-v67-section-inner) > :first-child{
+  margin-top:0!important;
+}
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main :is(.wp-theme-section-shell,.wpbb-v67-section-shell) > :is(.container,.container-fluid,.wpbb-v67-section-inner) > :last-child{
+  margin-bottom:0!important;
+}
+
+/* Empty catalogue title nodes from older imports can reserve a line-height even
+ * though no title is visible. Collapse only those empty nodes. */
+html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wp-theme-home-product-catalogue :is(h1,h2,h3,h4,h5,h6):empty{
+  display:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+}
+
+@media(max-width:991.98px){
+  :root{
+    --wpbb-v138-section-y:46px;
+    --wpbb-v138-section-y-adjacent:38px;
+    --wpbb-v138-heading-gap:24px;
+  }
+  html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wp-theme-home-stats{
+    padding-top:34px!important;
+    padding-bottom:16px!important;
+  }
+  html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-sector-proof-band{
+    padding-top:18px!important;
+    padding-bottom:38px!important;
+  }
+}
+@media(max-width:679.98px){
+  :root{
+    --wpbb-v138-section-y:38px;
+    --wpbb-v138-section-y-adjacent:32px;
+    --wpbb-v138-heading-gap:20px;
+  }
+  html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-swiper--hero .wpbb-v138-hero-pagination{
+    bottom:10px!important;
+    padding:6px 8px!important;
+  }
+  html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wp-theme-home-stats{
+    padding-top:28px!important;
+    padding-bottom:14px!important;
+  }
+  html body.wpbb-v138.wpbb-sector-premium.home #wp-theme-main .wpbb-sector-proof-band{
+    padding-top:14px!important;
+    padding-bottom:32px!important;
+  }
+}

@@ -1,0 +1,269 @@
+/* Tech Shop 3.8.11.50 - targeted section stability on top of the Events-parity owner. */
+:root{
+  --wpbb-v150-gap:24px;
+  --wpbb-v150-line:#dfe6ef;
+  --wpbb-v150-soft:#f5f8fd;
+  --wpbb-v150-ink:#10264a;
+  --wpbb-v150-copy:#5a6677;
+  --wpbb-v150-shadow:0 8px 24px rgba(15,35,69,.055);
+}
+
+/* --------------------------------------------------------------------------
+ * Trust/spec strip.
+ * The row lives inside a normal .container, so do not apply viewport offsets
+ * to the inner row again. The outer shell owns the measured Events-style rail.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v150.home #wp-theme-main .wpbb-v150-trust-shell{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-left:var(--wpbb-v149-left)!important;
+  padding-right:var(--wpbb-v149-right)!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wpbb-v150-trust-shell > .tech-spec-strip,
+html body.wpbb-v150.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid{
+  --bs-gutter-x:0!important;
+  --bs-gutter-y:0!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:18px 0 0!important;
+  padding:0!important;
+  align-items:stretch!important;
+}
+html body.wpbb-v150.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  box-sizing:border-box!important;
+  float:none!important;
+  display:block!important;
+  flex:none!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v150.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid .tech-trust-item{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  margin:0!important;
+  padding:16px 18px!important;
+  border-top:1px solid var(--wpbb-v150-line)!important;
+  background:transparent!important;
+}
+html body.wpbb-v150.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid .tech-trust-item h3{
+  margin:0 0 5px!important;
+  color:var(--wpbb-v150-ink)!important;
+  font-size:clamp(14px,1vw,17px)!important;
+  line-height:1.2!important;
+}
+html body.wpbb-v150.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid .tech-trust-item p{
+  margin:0!important;
+  color:var(--wpbb-v150-copy)!important;
+  font-size:13px!important;
+  line-height:1.45!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-partners-section{padding-bottom:8px!important}
+html body.wpbb-v150.home #wp-theme-main .wpbb-v150-trust-shell + .tech-category-section{padding-top:42px!important}
+
+/* --------------------------------------------------------------------------
+ * Gallery: freeze the homepage gallery into a deterministic card grid.
+ * Swiper can keep owning hero/partner sliders; only this gallery is static.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-static{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  overflow:visible!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-static > .swiper,
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-static.swiper{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  overflow:visible!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid{
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:20px!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  transition:none!important;
+  align-items:stretch!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid > .swiper-slide{
+  box-sizing:border-box!important;
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  overflow:hidden!important;
+  border:1px solid var(--wpbb-v150-line)!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:var(--wpbb-v150-shadow)!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid .wpbb-swiper-slide__media{
+  box-sizing:border-box!important;
+  position:relative!important;
+  inset:auto!important;
+  display:block!important;
+  flex:0 0 auto!important;
+  order:0!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:16/10!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-radius:0!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid .wpbb-swiper-slide__media img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid .wpbb-swiper-slide__content{
+  box-sizing:border-box!important;
+  position:static!important;
+  inset:auto!important;
+  display:block!important;
+  order:1!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:14px 16px 16px!important;
+  transform:none!important;
+  background:#fff!important;
+  color:var(--wpbb-v150-ink)!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid .wpbb-swiper-slide__eyebrow{
+  margin:0 0 4px!important;
+  color:var(--wpbb-v149-accent)!important;
+  font-size:11px!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid .wpbb-swiper-slide__title{
+  margin:0!important;
+  color:var(--wpbb-v150-ink)!important;
+  font-size:16px!important;
+  line-height:1.25!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-static :is(.swiper-pagination,.swiper-button-next,.swiper-button-prev){display:none!important}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid > .swiper-slide-duplicate{display:none!important}
+
+/* --------------------------------------------------------------------------
+ * Buying journey: the process badge is a small marker, never a grid-sized pill.
+ * -------------------------------------------------------------------------- */
+html body.wpbb-v150.home #wp-theme-main .wp-theme-sector-process-grid > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  height:auto!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-sector-process-grid .wp-theme-process-badge{
+  box-sizing:border-box!important;
+  position:absolute!important;
+  top:18px!important;
+  left:18px!important;
+  right:auto!important;
+  bottom:auto!important;
+  z-index:3!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 32px!important;
+  width:32px!important;
+  max-width:32px!important;
+  min-width:32px!important;
+  height:32px!important;
+  max-height:32px!important;
+  min-height:32px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #dce7f5!important;
+  border-radius:999px!important;
+  background:#eef6ff!important;
+  color:var(--wpbb-v149-accent)!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-sector-process-grid > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]) > .wp-theme-sector-card{
+  box-sizing:border-box!important;
+  position:relative!important;
+  flex:1 1 auto!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  min-height:170px!important;
+  margin:0!important;
+  padding:62px 20px 22px!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-sector-process-grid .wp-theme-sector-card::before,
+html body.wpbb-v150.home #wp-theme-main .wp-theme-sector-process-grid .wp-theme-sector-card::after{max-width:100%!important}
+
+/* Keep section headings, cards and article rows on the same measured rail. */
+html body.wpbb-v150.home #wp-theme-main :is(
+  .tech-category-grid,.wp-theme-sector-services,.wp-theme-sector-industries,.wp-theme-sector-proof,
+  .wp-theme-case-grid,.wp-theme-sector-process-grid,.wp-theme-blog-preview .wp-block-post-template
+){column-gap:var(--wpbb-v150-gap)!important}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section{overflow:visible!important}
+html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section > .container{overflow:visible!important}
+
+@media(max-width:1039.98px){
+  html body.wpbb-v150.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}
+}
+@media(max-width:767.98px){
+  html body.wpbb-v150.home #wp-theme-main .wpbb-v150-trust-shell{padding-left:16px!important;padding-right:16px!important}
+  html body.wpbb-v150.home #wp-theme-main .tech-spec-strip.wpbb-v150-trust-grid{grid-template-columns:1fr!important;gap:12px!important;margin-top:12px!important}
+  html body.wpbb-v150.home #wp-theme-main .wp-theme-gallery-section .wpbb-v150-gallery-grid{grid-template-columns:1fr!important;gap:16px!important}
+  html body.wpbb-v150.home #wp-theme-main .wp-theme-sector-process-grid > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]) > .wp-theme-sector-card{min-height:0!important}
+}

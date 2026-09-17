@@ -1,0 +1,429 @@
+/*
+ * Tech Shop 3.8.11.48 - deterministic homepage rail/grid recovery.
+ * One 1180px content rail. Full-width section backgrounds; contained content.
+ * No DOM guessing and no nested grid ownership.
+ */
+:root{
+  --tech-v148-rail:1180px;
+  --tech-v148-gutter:24px;
+  --tech-v148-gap:24px;
+  --tech-v148-section-y:58px;
+  --tech-v148-line:#dfe6ef;
+  --tech-v148-soft:#f4f7fd;
+  --tech-v148-ink:#10254c;
+  --tech-v148-copy:#52657a;
+}
+
+html,body{max-width:100%;overflow-x:clip}
+html body.home.wpbb-v148 #wp-theme-main *,
+html body.home.wpbb-v148 #wp-theme-main *::before,
+html body.home.wpbb-v148 #wp-theme-main *::after{box-sizing:border-box}
+
+/* --------------------------------------------------------------------------
+   Shared site rail: header/footer and every normal homepage row.
+   -------------------------------------------------------------------------- */
+html body.home.wpbb-v148 :is(
+  .wp-theme-utility-bar,
+  .wp-theme-header-main,
+  .wp-theme-header-search-panel,
+  .wp-theme-footer-newsletter-band,
+  .wp-theme-footer-main,
+  .wp-theme-footer-bottom
+) .container,
+html body.home.wpbb-v148 :is(.wp-theme-site-header,.wp-theme-site-footer) .container,
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-partners-section > .container,
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-section-shell > .container,
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-home-stats > .container,
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-blog-preview-container.container,
+html body.home.wpbb-v148 #wp-theme-main > .tech-spec-strip.container{
+  box-sizing:border-box!important;
+  width:min(calc(100% - (var(--tech-v148-gutter) * 2)),var(--tech-v148-rail))!important;
+  max-width:var(--tech-v148-rail)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+
+/* Full-width colour bands only. Their content is constrained by the rail above. */
+html body.home.wpbb-v148 #wp-theme-main :is(
+  .wp-theme-partners-section,
+  .wp-theme-section-shell,
+  .wp-theme-home-stats
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+  overflow:visible!important;
+}
+
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-section-shell{
+  padding-top:var(--tech-v148-section-y)!important;
+  padding-bottom:var(--tech-v148-section-y)!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-partners-section{
+  padding-top:26px!important;
+  padding-bottom:22px!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-home-stats{
+  padding-top:26px!important;
+  padding-bottom:26px!important;
+}
+
+/* Bootstrap rows must not add an invisible half-gutter to the shared rail. */
+html body.home.wpbb-v148 #wp-theme-main .container.wpbb-row,
+html body.home.wpbb-v148 #wp-theme-main .container.row{
+  --bs-gutter-x:0!important;
+  --bs-gutter-y:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-section-heading{
+  width:min(calc(100% - (var(--tech-v148-gutter) * 2)),var(--tech-v148-rail))!important;
+  max-width:var(--tech-v148-rail)!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0 auto 26px!important;
+  padding:0!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-section-heading > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  float:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-section-heading :is(h1,h2,h3,p){max-width:760px!important}
+
+/* Single-column rows such as gallery, catalogue and FAQ should not re-indent. */
+html body.home.wpbb-v148 #wp-theme-main .container.wpbb-row > .wpbb-column.col-12:first-child:last-child,
+html body.home.wpbb-v148 #wp-theme-main .container.wpbb-row > .wp-block-wpbb-column.col-12:first-child:last-child,
+html body.home.wpbb-v148 #wp-theme-main .container.row > [class*="col-"][class*="col-12"]:first-child:last-child{
+  float:none!important;
+  flex:0 0 100%!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+/* --------------------------------------------------------------------------
+   Hero: contained on the same outer grid as every section below.
+   -------------------------------------------------------------------------- */
+html body.home.wpbb-v148 #wp-theme-main > :is(.wp-theme-sector-hero,.wp-theme-hero,.wpbb-v62-hero){
+  position:relative!important;
+  box-sizing:border-box!important;
+  width:min(calc(100% - (var(--tech-v148-gutter) * 2)),var(--tech-v148-rail))!important;
+  max-width:var(--tech-v148-rail)!important;
+  min-width:0!important;
+  margin:22px auto 0!important;
+  padding:0!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+  overflow:hidden!important;
+  border-radius:0!important;
+  --bs-gutter-x:0!important;
+  --bs-gutter-y:0!important;
+  background:#0b2143!important;
+}
+html body.home.wpbb-v148 #wp-theme-main > :is(.wp-theme-sector-hero,.wp-theme-hero,.wpbb-v62-hero) > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  float:none!important;
+  display:block!important;
+  flex:0 0 100%!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero,
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero > .swiper,
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .swiper-wrapper{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide--hero{
+  position:relative!important;
+  width:100%!important;
+  min-width:100%!important;
+  max-width:none!important;
+  min-height:430px!important;
+  height:430px!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#0b2143!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  width:100%!important;
+  max-width:none!important;
+  height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  opacity:1!important;
+  transform:none!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media img{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(5,24,50,.80) 0%,rgba(5,24,50,.66) 30%,rgba(5,24,50,.30) 50%,rgba(5,24,50,.04) 72%,rgba(5,24,50,0) 84%)!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content{
+  position:relative!important;
+  z-index:2!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  width:min(50%,540px)!important;
+  max-width:540px!important;
+  min-height:430px!important;
+  height:430px!important;
+  margin:0!important;
+  padding:42px 0 58px 44px!important;
+  color:#fff!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content :is(h1,h2,h3,strong){color:#fff!important}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content p{color:rgba(255,255,255,.88)!important}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-v138-hero-pagination{
+  left:50%!important;
+  right:auto!important;
+  bottom:16px!important;
+  transform:translateX(-50%)!important;
+}
+
+/* --------------------------------------------------------------------------
+   Deterministic rows. Only the row owns the grid; columns do not own widths.
+   -------------------------------------------------------------------------- */
+html body.home.wpbb-v148 #wp-theme-main :is(
+  .tech-spec-strip,
+  .tech-category-grid,
+  .wp-theme-sector-services,
+  .wp-theme-sector-industries,
+  .wp-theme-sector-proof,
+  .wp-theme-case-grid,
+  .wp-theme-sector-process-grid
+){
+  display:grid!important;
+  width:min(calc(100% - (var(--tech-v148-gutter) * 2)),var(--tech-v148-rail))!important;
+  max-width:var(--tech-v148-rail)!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding:0!important;
+  gap:var(--tech-v148-gap)!important;
+  align-items:stretch!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+html body.home.wpbb-v148 #wp-theme-main :is(
+  .tech-spec-strip,
+  .tech-category-grid,
+  .wp-theme-sector-services,
+  .wp-theme-sector-industries,
+  .wp-theme-sector-proof,
+  .wp-theme-case-grid,
+  .wp-theme-sector-process-grid
+) > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  float:none!important;
+  display:flex!important;
+  flex:none!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  align-items:stretch!important;
+}
+html body.home.wpbb-v148 #wp-theme-main :is(
+  .tech-spec-strip,
+  .tech-category-grid,
+  .wp-theme-sector-services,
+  .wp-theme-sector-industries,
+  .wp-theme-sector-proof,
+  .wp-theme-case-grid,
+  .wp-theme-sector-process-grid
+) > * > :is(.tech-trust-item,.tech-category-card,.wp-theme-sector-card,.wp-theme-sector-proof__item,.wp-theme-case-card){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  margin:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main :is(.tech-spec-strip,.tech-category-grid,.wp-theme-sector-industries,.wp-theme-sector-proof){grid-template-columns:repeat(4,minmax(0,1fr))!important}
+html body.home.wpbb-v148 #wp-theme-main :is(.wp-theme-sector-services,.wp-theme-case-grid,.wp-theme-sector-process-grid){grid-template-columns:repeat(3,minmax(0,1fr))!important}
+
+/* The first strip is a normal rail row, not a full-width band. */
+html body.home.wpbb-v148 #wp-theme-main > .tech-spec-strip{margin-top:22px!important;margin-bottom:0!important}
+
+/* Image + text editorial row. */
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-sector-media-text{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:48px!important;
+  width:min(calc(100% - (var(--tech-v148-gutter) * 2)),var(--tech-v148-rail))!important;
+  max-width:var(--tech-v148-rail)!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding:0!important;
+  align-items:center!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-sector-media-text > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){
+  float:none!important;
+  flex:none!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-sector-media-text__media{width:100%!important;max-width:none!important;margin:0!important;overflow:hidden!important;border-radius:14px!important}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-sector-media-text__media img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:16/10!important;object-fit:cover!important}
+
+/* Standalone promo panel uses the exact same rail. */
+html body.home.wpbb-v148 #wp-theme-main .tech-promo-panel{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+}
+
+/* Gallery: keep Swiper functionality, only constrain it to the rail. */
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-gallery-section .wpbb-swiper--gallery,
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-gallery-section .swiper{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-gallery-section .wpbb-swiper-slide{height:auto!important;min-height:0!important}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-gallery-section .wpbb-swiper-slide__media{aspect-ratio:16/10!important;overflow:hidden!important}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-gallery-section .wpbb-swiper-slide__media img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+
+/* Catalogue: v144 owns product rendering; v148 only owns its rail. */
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-home-product-catalogue,
+html body.home.wpbb-v148 #wp-theme-main .wpbb-v144-home-products{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wpbb-v144-home-products__grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:var(--tech-v148-gap)!important;
+}
+
+/* Latest thinking. */
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-insights-section .wp-theme-section-heading{
+  display:grid!important;
+  grid-template-columns:minmax(0,2fr) minmax(220px,1fr)!important;
+  gap:24px!important;
+  align-items:end!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-insights-section .wp-theme-section-heading > :is(.wpbb-column,.wp-block-wpbb-column,[class^="col-"],[class*=" col-"]){width:auto!important;max-width:none!important}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-insights-section .wp-theme-section-heading > :last-child{justify-self:end!important}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-blog-preview .wp-block-post-template{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:var(--tech-v148-gap)!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  align-items:stretch!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-blog-preview .wp-block-post-template > *{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:100%!important;
+  margin:0!important;
+}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-blog-card .wp-block-post-featured-image{margin:0 0 16px!important}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-blog-card .wp-block-post-featured-image img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:16/10!important;object-fit:cover!important}
+
+/* FAQ and CTA cannot escape the rail via old transforms/max-widths. */
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-faq-section details{width:100%!important;max-width:none!important}
+html body.home.wpbb-v148 #wp-theme-main .wp-theme-home-cta{width:min(calc(100% - (var(--tech-v148-gutter) * 2)),var(--tech-v148-rail))!important;max-width:var(--tech-v148-rail)!important;margin-left:auto!important;margin-right:auto!important;left:auto!important;right:auto!important;transform:none!important}
+
+/* Responsive grid. */
+@media(max-width:1099.98px){
+  :root{--tech-v148-gutter:20px;--tech-v148-gap:20px;--tech-v148-section-y:50px}
+  html body.home.wpbb-v148 #wp-theme-main :is(.tech-spec-strip,.tech-category-grid,.wp-theme-sector-services,.wp-theme-sector-industries,.wp-theme-sector-proof,.wp-theme-case-grid,.wp-theme-sector-process-grid){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body.home.wpbb-v148 #wp-theme-main .wpbb-v144-home-products__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body.home.wpbb-v148 #wp-theme-main .wp-theme-blog-preview .wp-block-post-template{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:767.98px){
+  :root{--tech-v148-gutter:16px;--tech-v148-gap:16px;--tech-v148-section-y:40px}
+  html body.home.wpbb-v148 #wp-theme-main > :is(.wp-theme-sector-hero,.wp-theme-hero,.wpbb-v62-hero){margin-top:14px!important}
+  html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide--hero{height:500px!important;min-height:500px!important}
+  html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media img{object-position:62% center!important}
+  html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__media::after{background:linear-gradient(180deg,rgba(5,24,50,.80) 0%,rgba(5,24,50,.52) 52%,rgba(5,24,50,.28) 100%)!important}
+  html body.home.wpbb-v148 #wp-theme-main .wpbb-swiper--hero .wpbb-swiper-slide__content{width:100%!important;max-width:none!important;height:500px!important;min-height:500px!important;padding:42px 24px 72px!important;justify-content:flex-end!important}
+  html body.home.wpbb-v148 #wp-theme-main :is(.tech-category-grid,.wp-theme-sector-services,.wp-theme-sector-industries,.wp-theme-case-grid,.wp-theme-sector-process-grid){grid-template-columns:1fr!important}
+  html body.home.wpbb-v148 #wp-theme-main :is(.tech-spec-strip,.wp-theme-sector-proof){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body.home.wpbb-v148 #wp-theme-main .wp-theme-sector-media-text{grid-template-columns:1fr!important;gap:28px!important}
+  html body.home.wpbb-v148 #wp-theme-main .wpbb-v144-home-products__grid{grid-template-columns:1fr!important}
+  html body.home.wpbb-v148 #wp-theme-main .wp-theme-insights-section .wp-theme-section-heading{grid-template-columns:1fr!important;align-items:start!important}
+  html body.home.wpbb-v148 #wp-theme-main .wp-theme-insights-section .wp-theme-section-heading > :last-child{justify-self:start!important}
+  html body.home.wpbb-v148 #wp-theme-main .wp-theme-blog-preview .wp-block-post-template{grid-template-columns:1fr!important}
+}
